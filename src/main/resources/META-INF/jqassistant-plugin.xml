@@ -1,0 +1,13 @@
+<jqassistant-plugin xmlns="http://schema.jqassistant.org/plugin/v1.8"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://schema.jqassistant.org/plugin/v1.8 https://schema.jqassistant.org/plugin/jqassistant-plugin-v1.8.xsd"
+                    name="Docker">
+    <description>Provides a scanner for maven repositories.</description>
+    <model>
+        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.SBOMXmlFileDescriptor</class>
+        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.MetadataDescriptor</class>
+    </model>
+    <scanner>
+        <class>org.jqassistant.plugin.cyclonedx.impl.sbom.SBOMXmlScannerPlugin</class>
+    </scanner>
+</jqassistant-plugin>
