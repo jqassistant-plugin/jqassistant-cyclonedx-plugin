@@ -5,6 +5,7 @@ import org.jqassistant.plugin.cyclonedx.generated.bom.Metadata;
 import org.jqassistant.plugin.cyclonedx.impl.mapper.DescriptorMapper;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(uses = ComponentMapper.class)
 public interface MetadataMapper extends DescriptorMapper<Metadata, MetadataDescriptor> {
+
 }

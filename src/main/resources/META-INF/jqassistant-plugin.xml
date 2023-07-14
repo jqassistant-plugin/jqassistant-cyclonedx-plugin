@@ -6,6 +6,7 @@
     <model>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.SBOMXmlFileDescriptor</class>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.MetadataDescriptor</class>
+        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.ComponentDescriptor</class>
     </model>
     <scanner>
         <class>org.jqassistant.plugin.cyclonedx.impl.sbom.SBOMXmlScannerPlugin</class>
