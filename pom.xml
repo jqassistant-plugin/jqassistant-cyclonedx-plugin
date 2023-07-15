@@ -80,9 +80,8 @@
                             </path>
                         </annotationProcessorPaths>
                         <compilerArgs>
-                            <arg>-Amapstruct.unmappedTargetPolicy=WARN</arg>
+                            <arg>-Amapstruct.unmappedTargetPolicy=ERROR</arg>
                             <arg>-Amapstruct.unmappedSourcePolicy=WARN</arg>
-                            <arg>-Amapstruct.defaultInjectionStrategy=constructor</arg>
                         </compilerArgs>
                     </configuration>
                 </plugin>

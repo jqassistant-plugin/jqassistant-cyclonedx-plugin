@@ -8,7 +8,7 @@ import com.buschmais.xo.neo4j.api.annotation.Relation;
 import org.jqassistant.plugin.cyclonedx.api.model.CycloneDXDescriptor;
 
 @Label("Component")
-public interface ComponentDescriptor extends CycloneDXDescriptor, BomRefTemplate, HashesTemplate {
+public interface ComponentDescriptor extends CycloneDXDescriptor, BomRefTemplate, HashesTemplate, LicensesTemplate {
 
     String getType();
 
@@ -44,7 +44,4 @@ public interface ComponentDescriptor extends CycloneDXDescriptor, BomRefTemplate
 
     @Relation("DEPENDS_ON")
     List<ComponentDescriptor> getDependencies();
-
-    @Relation("DECLARES_LICENSE")
-    List<LicenseDescriptor> getLicenses();
 }

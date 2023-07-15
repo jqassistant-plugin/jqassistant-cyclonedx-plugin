@@ -25,7 +25,6 @@ import static java.util.stream.Collectors.toList;
 @Mapper(uses = { MetadataMapper.class, ComponentMapper.class })
 public interface SBOMMapper extends DescriptorMapper<Bom, SBOMDescriptor> {
 
-    @Mapping(target = "components")
     default List<ComponentDescriptor> map(ComponentsType componentsType, @Context Scanner scanner) {
         return componentsType.getComponentAndAny()
             .stream()

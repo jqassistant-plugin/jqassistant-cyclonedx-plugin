@@ -12,24 +12,26 @@ import org.jqassistant.plugin.cyclonedx.generated.bom.LicenseChoiceType;
 import org.jqassistant.plugin.cyclonedx.impl.mapper.DescriptorMapper;
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 import static java.util.Collections.singletonList;
 import static org.mapstruct.factory.Mappers.getMapper;
 
-@Mapper(uses = HashMapper.class)
+@Mapper(uses = {HashMapper.class, LicenseMapper.class})
 public interface ComponentMapper extends DescriptorMapper<Component, ComponentDescriptor> {
 
     ComponentMapper INSTANCE = getMapper(ComponentMapper.class);
 
+    @Mapping(target = "dependencies", ignore = true)
+    @Override
+    ComponentDescriptor toDescriptor(Component type, @Context Scanner scanner);
+
+    @Mapping(target = "dependencies", ignore = true)
+    @Override
+    void toDescriptor(Component type, @MappingTarget ComponentDescriptor descriptor, @Context Scanner scanner);
+
     default List<HashDescriptor> map(Component.Hashes hashes, @Context Scanner scanner) {
         return map(hashes, () -> hashes.getHash(), HashMapper.INSTANCE, scanner);
     }
-
-    default List<LicenseDescriptor> mapLicenses(LicenseChoiceType licenseChoiceType, @Context Scanner scanner) {
-        LicenseChoiceType.Expression expression = licenseChoiceType.getExpression();
-        return expression != null ?
-            singletonList(LicenseExpressionMapper.INSTANCE.toDescriptor(expression, scanner)) :
-            map(licenseChoiceType, () -> licenseChoiceType.getLicense(), LicenseMapper.INSTANCE, scanner);
-    }
-
 }

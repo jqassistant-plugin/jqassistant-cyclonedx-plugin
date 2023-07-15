@@ -13,7 +13,7 @@ import org.mapstruct.Mapper;
 
 import static org.mapstruct.factory.Mappers.getMapper;
 
-@Mapper(uses = ComponentMapper.class)
+@Mapper(uses = { ComponentMapper.class, LicenseMapper.class })
 public interface MetadataMapper extends DescriptorMapper<Metadata, MetadataDescriptor> {
 
     MetadataMapper INSTANCE = getMapper(MetadataMapper.class);
