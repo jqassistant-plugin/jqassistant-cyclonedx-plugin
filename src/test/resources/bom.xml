@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom serialNumber="urn:uuid:dc93017a-32eb-4d7d-8e9e-83d4de0a4fa6" version="1" xmlns="http://cyclonedx.org/schema/bom/1.4">
+<bom serialNumber="urn:uuid:5f9bcd89-c696-4faa-a07c-176db2015a59" version="1" xmlns="http://cyclonedx.org/schema/bom/1.4">
   <metadata>
-    <timestamp>2023-07-14T11:15:29Z</timestamp>
+    <timestamp>2023-07-14T17:52:36Z</timestamp>
     <tools>
       <tool>
         <vendor>OWASP Foundation</vendor>
@@ -19,11 +19,11 @@
         </hashes>
       </tool>
     </tools>
-    <component type="library" bom-ref="pkg:maven/org.jqassistant.plugin/jqassistant-cyclonedx-plugin@2.1.0-SNAPSHOT?type=jar">
+    <component type="library" bom-ref="pkg:maven/org.jqassistant.plugin/jqassistant-cyclonedx-plugin@1.0.0-SNAPSHOT?type=jar">
       <publisher>jQAssistant Development Team</publisher>
       <group>org.jqassistant.plugin</group>
       <name>jqassistant-cyclonedx-plugin</name>
-      <version>2.1.0-SNAPSHOT</version>
+      <version>1.0.0-SNAPSHOT</version>
       <description>Plugin for jQAssistant plugin providing scanners and rules for CycloneDX files (e.g. SBOM).</description>
       <licenses>
         <license>
@@ -31,7 +31,7 @@
           <url>https://www.gnu.org/licenses/gpl-3.0.html</url>
         </license>
       </licenses>
-      <purl>pkg:maven/org.jqassistant.plugin/jqassistant-cyclonedx-plugin@2.1.0-SNAPSHOT?type=jar</purl>
+      <purl>pkg:maven/org.jqassistant.plugin/jqassistant-cyclonedx-plugin@1.0.0-SNAPSHOT?type=jar</purl>
       <externalReferences><reference type="website"><url>https://jqassistant.org/</url></reference><reference type="distribution"><url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url></reference><reference type="vcs"><url>https://github.com/jqassistant-plugin/jqassistant-cyclonedx-plugin</url></reference></externalReferences>
     </component>
     <properties>
@@ -1427,6 +1427,57 @@ Brotli, Zstandard and ar, cpio, jar, tar, zip, dump, 7z, arj.</description>
       <purl>pkg:maven/org.antlr/antlr4-runtime@4.9.2?type=jar</purl>
       <externalReferences><reference type="website"><url>http://www.antlr.org/antlr4-runtime</url></reference><reference type="distribution"><url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url></reference><reference type="issue-tracker"><url>https://github.com/antlr/antlr4/issues</url></reference><reference type="mailing-list"><url>https://groups.google.com/forum/?fromgroups#!forum/antlr-discussion</url></reference><reference type="vcs"><url>https://github.com/antlr/antlr4/tree/master/antlr4-runtime</url></reference></externalReferences>
     </component>
+    <component type="library" bom-ref="pkg:maven/com.buschmais.jqassistant.plugin/xml@2.0.0?type=jar">
+      <publisher>jQAssistant Development Team</publisher>
+      <group>com.buschmais.jqassistant.plugin</group>
+      <name>xml</name>
+      <version>2.0.0</version>
+      <description>Plugin for jQAssistant to be able to scan and to
+        analyze XML related artifacts.</description>
+      <scope>required</scope>
+      <hashes>
+        <hash alg="MD5">dbd67b43462c631ea7cade94aaf0551b</hash>
+        <hash alg="SHA-1">469ae381ebb1138d3c1d6919726a46b495cc54f7</hash>
+        <hash alg="SHA-256">fd0ec91e57394912e5f4311648a3c91c8d575f9529ebf46406e0262f6d2bd719</hash>
+        <hash alg="SHA-512">cdef2823fc45abcfb6a74536dd16a641caa2dc6ad0109bf74fa86899fb2d91ca91d83429a2331013968bf10a6e70339b1b1539c0934e3c03811467f3832fe5ec</hash>
+        <hash alg="SHA-384">58ff030e710f27e16c6e25034004f7a99f0e459e5c81510f2a2da17f083e24093db6e6d10b8f2fb362ed4b278eebfd3c</hash>
+        <hash alg="SHA3-384">2df7cf95b25ddc1a5b21805b1441960fe8b7c7358748cfa3a44dc7f6e72990b6920df147c3a0b98b8ef8f7ebf9fbd28b</hash>
+        <hash alg="SHA3-256">e9979436736e5b2ba6a4e87df04832df2041c42922a243e49771d22809cd3180</hash>
+        <hash alg="SHA3-512">a5a399ea11f38fac6cec9794379c072fcc5df3de21cc60c7d40d726f0dac565ecba276fa0d8b6403d483047c4dcc84c687770b96ed507ba6f29bcc1ad500df50</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <name>GNU General Public License, v3</name>
+          <url>https://www.gnu.org/licenses/gpl-3.0.html</url>
+        </license>
+      </licenses>
+      <purl>pkg:maven/com.buschmais.jqassistant.plugin/xml@2.0.0?type=jar</purl>
+      <externalReferences><reference type="website"><url>https://jqassistant.org/</url></reference><reference type="distribution"><url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url></reference><reference type="vcs"><url>https://github.com/jqassistant/jqa-xml-plugin</url></reference></externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/org.mapstruct/mapstruct@1.5.5.Final?type=jar">
+      <group>org.mapstruct</group>
+      <name>mapstruct</name>
+      <version>1.5.5.Final</version>
+      <description>An annotation processor for generating type-safe bean mappers</description>
+      <scope>required</scope>
+      <hashes>
+        <hash alg="MD5">9f2f737ffa2496ca5c40dcc323068803</hash>
+        <hash alg="SHA-1">2ca3cbe39b6e9ea8d5ea521965a89bef2a1e8eeb</hash>
+        <hash alg="SHA-256">6391e07982855dd804d825b63a55ab9251003716547216e5f581123c841328d5</hash>
+        <hash alg="SHA-512">055d7321e25ce985307a5ffc481205b2c7a0bd27dcc65e95e9868174b09c27c7dd5114f8c9c6e5a12f2367366e00715a1ec7015a5a92cb8c1596c06147de851b</hash>
+        <hash alg="SHA-384">754fe1cf99008802dd0afecc00814751335c470c4a60ba0e27a86e025c3beecd7d1c69e3a187bd3133a58082319e82b5</hash>
+        <hash alg="SHA3-384">eced1a3ac2189df19c49c5c28fd8479151629c11fe8a248fcc817ea517dc026be8e75594afca58e4df0ca6fa9f794e2f</hash>
+        <hash alg="SHA3-256">f4fa8cd72d6143363b27692d82caa189c247fd387332dcb03ebcab7ecb5e000f</hash>
+        <hash alg="SHA3-512">d6236955075071543386efc432580b7790b6aebc3f56739efec1bfc803d51dae8a4b1941892c00c2042cd8a017627a9215fa4c05a7fc3a6043811539f4ce1f57</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>Apache-2.0</id>
+        </license>
+      </licenses>
+      <purl>pkg:maven/org.mapstruct/mapstruct@1.5.5.Final?type=jar</purl>
+      <externalReferences><reference type="website"><url>https://mapstruct.org/mapstruct/</url></reference><reference type="vcs"><url>https://github.com/mapstruct/mapstruct/mapstruct/</url></reference></externalReferences>
+    </component>
     <component type="library" bom-ref="pkg:maven/org.projectlombok/lombok@1.18.24?type=jar">
       <group>org.projectlombok</group>
       <name>lombok</name>
@@ -1453,10 +1504,12 @@ Brotli, Zstandard and ar, cpio, jar, tar, zip, dump, 7z, arj.</description>
     </component>
   </components>
   <dependencies>
-    <dependency ref="pkg:maven/org.jqassistant.plugin/jqassistant-cyclonedx-plugin@2.1.0-SNAPSHOT?type=jar">
+    <dependency ref="pkg:maven/org.jqassistant.plugin/jqassistant-cyclonedx-plugin@1.0.0-SNAPSHOT?type=jar">
       <dependency ref="pkg:maven/com.buschmais.jqassistant.core/scanner@2.0.0?type=jar"/>
       <dependency ref="pkg:maven/com.buschmais.jqassistant.plugin/common@2.0.0?type=jar"/>
       <dependency ref="pkg:maven/com.buschmais.jqassistant.plugin/json@2.0.0?type=jar"/>
+      <dependency ref="pkg:maven/com.buschmais.jqassistant.plugin/xml@2.0.0?type=jar"/>
+      <dependency ref="pkg:maven/org.mapstruct/mapstruct@1.5.5.Final?type=jar"/>
       <dependency ref="pkg:maven/org.projectlombok/lombok@1.18.24?type=jar"/>
     </dependency>
     <dependency ref="pkg:maven/com.buschmais.jqassistant.core/scanner@2.0.0?type=jar">
@@ -1619,6 +1672,10 @@ Brotli, Zstandard and ar, cpio, jar, tar, zip, dump, 7z, arj.</description>
       <dependency ref="pkg:maven/org.antlr/antlr4-runtime@4.9.2?type=jar"/>
     </dependency>
     <dependency ref="pkg:maven/org.antlr/antlr4-runtime@4.9.2?type=jar"/>
+    <dependency ref="pkg:maven/com.buschmais.jqassistant.plugin/xml@2.0.0?type=jar">
+      <dependency ref="pkg:maven/com.buschmais.jqassistant.plugin/common@2.0.0?type=jar"/>
+    </dependency>
+    <dependency ref="pkg:maven/org.mapstruct/mapstruct@1.5.5.Final?type=jar"/>
     <dependency ref="pkg:maven/org.projectlombok/lombok@1.18.24?type=jar"/>
   </dependencies>
 </bom>

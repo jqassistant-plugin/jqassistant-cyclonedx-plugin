@@ -1,8 +1,11 @@
 package org.jqassistant.plugin.cyclonedx.api.model.sbom;
 
-import org.jqassistant.plugin.cyclonedx.api.model.CycloneDXDescriptor;
+import java.util.List;
+
 import com.buschmais.xo.neo4j.api.annotation.Label;
 import com.buschmais.xo.neo4j.api.annotation.Relation;
+
+import org.jqassistant.plugin.cyclonedx.api.model.CycloneDXDescriptor;
 
 @Label("SBOM")
 public interface SBOMDescriptor extends CycloneDXDescriptor {
@@ -19,5 +22,8 @@ public interface SBOMDescriptor extends CycloneDXDescriptor {
     MetadataDescriptor getMetadata();
 
     void setMetadata(MetadataDescriptor metadata);
+
+    @Relation("HAS_COMPONENT")
+    List<ComponentDescriptor> getComponents();
 
 }
