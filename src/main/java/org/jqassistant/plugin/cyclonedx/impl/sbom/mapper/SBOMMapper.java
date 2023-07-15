@@ -40,19 +40,19 @@ public interface SBOMMapper extends DescriptorMapper<Bom, SBOMDescriptor> {
     default void resolveDependencies(Bom bom, @Context Scanner scanner) {
         Resolvers resolvers = scanner.getContext()
             .peek(Resolvers.class);
-        process(scanner, resolvers, bom.getDependencies()
-            .getDependency());
+        resolveDependencies(bom.getDependencies()
+            .getDependency(), resolvers, scanner);
 
     }
 
-    static List<ComponentDescriptor> process(Scanner scanner, Resolvers resolvers, List<DependencyType> dependencies) {
+    static List<ComponentDescriptor> resolveDependencies(List<DependencyType> dependencies, Resolvers resolvers, Scanner scanner) {
         List<ComponentDescriptor> componentDescriptors = new ArrayList<>();
         for (DependencyType dependency : dependencies) {
-            ComponentDescriptor parent = resolvers.resolve(dependency, ComponentDescriptor.class, scanner.getContext());
-            List<ComponentDescriptor> children = process(scanner, resolvers, dependency.getDependency());
-            parent.getDependencies()
-                .addAll(children);
-            componentDescriptors.add(parent);
+            ComponentDescriptor dependentDescriptor = resolvers.resolve(dependency, ComponentDescriptor.class, scanner.getContext());
+            componentDescriptors.add(dependentDescriptor);
+            List<ComponentDescriptor> dependencyDescriptors = resolveDependencies(dependency.getDependency(), resolvers, scanner);
+            dependentDescriptor.getDependencies()
+                .addAll(dependencyDescriptors);
         }
         return componentDescriptors;
     }

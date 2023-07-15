@@ -1,9 +1,5 @@
 package org.jqassistant.plugin.cyclonedx.impl.sbom.resolver;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
-
 import com.buschmais.jqassistant.core.scanner.api.ScannerContext;
 
 import lombok.RequiredArgsConstructor;
@@ -14,19 +10,11 @@ import org.jqassistant.plugin.cyclonedx.impl.resolver.Resolver;
 @RequiredArgsConstructor
 public class ComponentResolver implements Resolver<Component, ComponentDescriptor> {
 
-    private final Map<String, ComponentDescriptor> components = new HashMap<>();
+    private final BomRefResolver bomRefResolver;
 
     @Override
     public ComponentDescriptor resolve(Component component, ScannerContext scannerContext) {
-        return resolve(component.getBomRef(), scannerContext);
+        return bomRefResolver.resolve(component.getBomRef(), ComponentDescriptor.class, scannerContext);
     }
 
-    ComponentDescriptor resolve(String bomRef, ScannerContext scannerContext) {
-        return components.computeIfAbsent(bomRef, key -> {
-            ComponentDescriptor componentDescriptor = scannerContext.getStore()
-                .create(ComponentDescriptor.class);
-            componentDescriptor.setBomRef(bomRef);
-            return componentDescriptor;
-        });
-    }
 }

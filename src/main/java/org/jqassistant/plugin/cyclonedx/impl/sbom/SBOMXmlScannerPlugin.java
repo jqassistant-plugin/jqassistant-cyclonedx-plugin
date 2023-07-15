@@ -17,10 +17,13 @@ import org.jqassistant.plugin.cyclonedx.api.model.sbom.SBOMXmlFileDescriptor;
 import org.jqassistant.plugin.cyclonedx.generated.bom.Bom;
 import org.jqassistant.plugin.cyclonedx.generated.bom.Component;
 import org.jqassistant.plugin.cyclonedx.generated.bom.DependencyType;
+import org.jqassistant.plugin.cyclonedx.generated.bom.LicenseType;
 import org.jqassistant.plugin.cyclonedx.impl.resolver.Resolvers;
+import org.jqassistant.plugin.cyclonedx.impl.sbom.mapper.SBOMMapper;
+import org.jqassistant.plugin.cyclonedx.impl.sbom.resolver.BomRefResolver;
 import org.jqassistant.plugin.cyclonedx.impl.sbom.resolver.ComponentResolver;
 import org.jqassistant.plugin.cyclonedx.impl.sbom.resolver.DependencyResolver;
-import org.jqassistant.plugin.cyclonedx.impl.sbom.mapper.SBOMMapper;
+import org.jqassistant.plugin.cyclonedx.impl.sbom.resolver.LicenseResolver;
 
 import static org.mapstruct.factory.Mappers.getMapper;
 
@@ -49,11 +52,11 @@ public class SBOMXmlScannerPlugin extends AbstractXmlFileScannerPlugin<SBOMXmlFi
         throws IOException {
         ScannerContext scannerContext = scanner.getContext();
         Bom bom = unmarshal(fileResource);
-        ComponentResolver componentResolver = new ComponentResolver();
-        DependencyResolver dependencyResolver = new DependencyResolver(componentResolver);
+        BomRefResolver bomRefResolver = new BomRefResolver();
         Resolvers resolvers = Resolvers.builder()
-            .resolver(Component.class, componentResolver)
-            .resolver(DependencyType.class, dependencyResolver)
+            .resolver(Component.class, new ComponentResolver(bomRefResolver))
+            .resolver(DependencyType.class, new DependencyResolver(bomRefResolver))
+            .resolver(LicenseType.class, new LicenseResolver(bomRefResolver))
             .build();
         scannerContext.push(Resolvers.class, resolvers);
         try {

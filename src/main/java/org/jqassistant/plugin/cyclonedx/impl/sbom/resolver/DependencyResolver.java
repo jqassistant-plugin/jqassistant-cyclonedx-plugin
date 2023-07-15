@@ -10,10 +10,10 @@ import org.jqassistant.plugin.cyclonedx.impl.resolver.Resolver;
 @RequiredArgsConstructor
 public class DependencyResolver implements Resolver<DependencyType, ComponentDescriptor> {
 
-    private final ComponentResolver componentResolver;
+    private final BomRefResolver bomRefResolver;
 
     @Override
     public ComponentDescriptor resolve(DependencyType dependencyType, ScannerContext scannerContext) {
-        return componentResolver.resolve(dependencyType.getRef(), scannerContext);
+        return bomRefResolver.resolve(dependencyType.getRef(), ComponentDescriptor.class, scannerContext);
     }
 }

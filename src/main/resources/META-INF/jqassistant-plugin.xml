@@ -6,6 +6,7 @@
     <model>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.ComponentDescriptor</class>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.HashDescriptor</class>
+        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.LicenseDescriptor</class>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.MetadataDescriptor</class>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.SBOMXmlFileDescriptor</class>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.ToolDescriptor</class>

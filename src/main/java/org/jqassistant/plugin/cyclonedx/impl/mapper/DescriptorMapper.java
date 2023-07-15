@@ -12,7 +12,6 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.ObjectFactory;
 import org.mapstruct.TargetType;
 
-import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.toList;
 
 public interface DescriptorMapper<T, D extends Descriptor> {
@@ -28,13 +27,13 @@ public interface DescriptorMapper<T, D extends Descriptor> {
             .resolve(type, targetType, scanner.getContext());
     }
 
-    default <T, E, D extends Descriptor, M extends DescriptorMapper<E, D>> List<D> map(T wrapper, Supplier<List<E>> elements, M mapper,
-        Scanner scanner) {
-        return wrapper == null ?
-            emptyList() :
-            elements.get()
-                .stream()
-                .map(element -> mapper.toDescriptor(element, scanner))
-                .collect(toList());
+    default <T, E, D extends Descriptor, M extends DescriptorMapper<E, D>> List<D> map(List<E> elements, M mapper, Scanner scanner) {
+        return elements.stream()
+            .map(element -> mapper.toDescriptor(element, scanner))
+            .collect(toList());
+    }
+
+    default <T, E, D extends Descriptor, M extends DescriptorMapper<E, D>> List<D> map(T wrapper, Supplier<List<E>> elements, M mapper, Scanner scanner) {
+        return wrapper == null ? null : map(elements.get(), mapper, scanner);
     }
 }
