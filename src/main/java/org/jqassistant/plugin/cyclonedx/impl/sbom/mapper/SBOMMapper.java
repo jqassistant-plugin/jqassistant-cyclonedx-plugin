@@ -18,12 +18,17 @@ import org.jqassistant.plugin.cyclonedx.impl.resolver.Resolvers;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.factory.Mappers;
 
 import static java.util.stream.Collectors.toList;
 
 @Mapper(uses = { MetadataMapper.class, ComponentMapper.class })
 public interface SBOMMapper extends DescriptorMapper<Bom, SBOMDescriptor> {
+
+    SBOMMapper INSTANCE = Mappers.getMapper(SBOMMapper.class);
+
+    void toDescriptor(Bom bom, @MappingTarget SBOMDescriptor sbomDescriptor, @Context Scanner scanner);
 
     default List<ComponentDescriptor> map(ComponentsType componentsType, @Context Scanner scanner) {
         return componentsType.getComponentAndAny()

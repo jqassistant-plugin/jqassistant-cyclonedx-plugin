@@ -8,7 +8,6 @@ import org.jqassistant.plugin.cyclonedx.impl.mapper.DescriptorMapper;
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
 
 import static org.mapstruct.factory.Mappers.getMapper;
 
@@ -23,12 +22,5 @@ public interface LicenseExpressionMapper extends DescriptorMapper<LicenseChoiceT
     @Mapping(target = "url", ignore = true)
     @Override
     LicenseDescriptor toDescriptor(LicenseChoiceType.Expression type, @Context Scanner scanner);
-
-    @Mapping(target = "expression", source = "value")
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "name", ignore = true)
-    @Mapping(target = "url", ignore = true)
-    @Override
-    void toDescriptor(LicenseChoiceType.Expression type, @MappingTarget LicenseDescriptor descriptor, @Context Scanner scanner);
 
 }

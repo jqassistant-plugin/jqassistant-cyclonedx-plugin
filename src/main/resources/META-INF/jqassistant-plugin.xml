@@ -5,6 +5,7 @@
     <description>Provides a scanner for CycloneDX SBOM files.</description>
     <model>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.ComponentDescriptor</class>
+        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.ExternalReferenceDescriptor</class>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.HashDescriptor</class>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.LicenseDescriptor</class>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.MetadataDescriptor</class>

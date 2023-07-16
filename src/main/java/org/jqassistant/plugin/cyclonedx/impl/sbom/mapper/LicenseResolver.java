@@ -1,4 +1,4 @@
-package org.jqassistant.plugin.cyclonedx.impl.sbom.resolver;
+package org.jqassistant.plugin.cyclonedx.impl.sbom.mapper;
 
 import com.buschmais.jqassistant.core.scanner.api.ScannerContext;
 

@@ -19,13 +19,7 @@ import org.jqassistant.plugin.cyclonedx.generated.bom.Component;
 import org.jqassistant.plugin.cyclonedx.generated.bom.DependencyType;
 import org.jqassistant.plugin.cyclonedx.generated.bom.LicenseType;
 import org.jqassistant.plugin.cyclonedx.impl.resolver.Resolvers;
-import org.jqassistant.plugin.cyclonedx.impl.sbom.mapper.SBOMMapper;
-import org.jqassistant.plugin.cyclonedx.impl.sbom.resolver.BomRefResolver;
-import org.jqassistant.plugin.cyclonedx.impl.sbom.resolver.ComponentResolver;
-import org.jqassistant.plugin.cyclonedx.impl.sbom.resolver.DependencyResolver;
-import org.jqassistant.plugin.cyclonedx.impl.sbom.resolver.LicenseResolver;
-
-import static org.mapstruct.factory.Mappers.getMapper;
+import org.jqassistant.plugin.cyclonedx.impl.sbom.mapper.*;
 
 public class SBOMXmlScannerPlugin extends AbstractXmlFileScannerPlugin<SBOMXmlFileDescriptor> {
 
@@ -60,8 +54,7 @@ public class SBOMXmlScannerPlugin extends AbstractXmlFileScannerPlugin<SBOMXmlFi
             .build();
         scannerContext.push(Resolvers.class, resolvers);
         try {
-            SBOMMapper sbomMapper = getMapper(SBOMMapper.class);
-            sbomMapper.toDescriptor(bom, sbomXmlFileDescriptor, scanner);
+            SBOMMapper.INSTANCE.toDescriptor(bom, sbomXmlFileDescriptor, scanner);
             return sbomXmlFileDescriptor;
         } finally {
             scannerContext.pop(Resolvers.class);

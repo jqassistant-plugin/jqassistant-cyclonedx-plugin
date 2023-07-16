@@ -1,4 +1,4 @@
-package org.jqassistant.plugin.cyclonedx.impl.sbom.resolver;
+package org.jqassistant.plugin.cyclonedx.impl.sbom.mapper;
 
 import java.util.HashMap;
 import java.util.Map;

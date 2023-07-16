@@ -1,0 +1,24 @@
+= jQAssistant CycloneDX Plugin
+
+This is the CycloneDX Plugin of https://jqassistant.org[jQAssistant].
+It provides a scanner for SBOM files.
+
+For more information on jQAssistant see https://jqassistant.org[^].
+
+== Usage
+
+Add the plugin to the plugins section of the `jqassistant.yml` configuration file:
+
+[source,yaml]
+----
+jqassistant:
+  plugins:
+    # Includes the jQAssistant CycloneDX plugin
+    - group-id: org.jqassistant.plugin
+      artifact-id: jqassistant-cyclonedx-plugin
+      version: 2.0.0-SNAPSHOT
+  scan:
+    include:
+      files:
+        - cyclonedx:sbom::${project.basedir}/bom.xml
+----

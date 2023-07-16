@@ -44,4 +44,7 @@ public interface ComponentDescriptor extends CycloneDXDescriptor, BomRefTemplate
 
     @Relation("DEPENDS_ON")
     List<ComponentDescriptor> getDependencies();
+
+    @Relation("HAS_EXTERNAL_REFERENCE")
+    List<ExternalReferenceDescriptor> getExternalReferences();
 }
