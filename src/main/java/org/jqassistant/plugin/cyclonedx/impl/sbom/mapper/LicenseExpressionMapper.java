@@ -9,12 +9,8 @@ import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import static org.mapstruct.factory.Mappers.getMapper;
-
 @Mapper
 public interface LicenseExpressionMapper extends DescriptorMapper<LicenseChoiceType.Expression, LicenseDescriptor> {
-
-    LicenseExpressionMapper INSTANCE = getMapper(LicenseExpressionMapper.class);
 
     @Mapping(target = "expression", source = "value")
     @Mapping(target = "id", ignore = true)

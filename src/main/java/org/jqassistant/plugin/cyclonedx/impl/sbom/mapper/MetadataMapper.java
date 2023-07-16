@@ -9,12 +9,8 @@ import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import static org.mapstruct.factory.Mappers.getMapper;
-
 @Mapper(uses = { ComponentMapper.class, LicenseMapper.class, ToolMapper.class })
 public interface MetadataMapper extends DescriptorMapper<Metadata, MetadataDescriptor> {
-
-    MetadataMapper INSTANCE = getMapper(MetadataMapper.class);
 
     @Mapping(target = "tools", source = "tools.tool")
     @Override

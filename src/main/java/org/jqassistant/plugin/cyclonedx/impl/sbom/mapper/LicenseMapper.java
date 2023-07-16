@@ -11,16 +11,14 @@ import org.jqassistant.plugin.cyclonedx.impl.mapper.DescriptorMapper;
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
-import static org.mapstruct.factory.Mappers.getMapper;
 
 @Mapper(uses = LicenseExpressionMapper.class)
 public interface LicenseMapper extends DescriptorMapper<LicenseType, LicenseDescriptor> {
-
-    LicenseMapper INSTANCE = getMapper(LicenseMapper.class);
 
     @Mapping(target = "expression", ignore = true)
     @Override
@@ -32,7 +30,8 @@ public interface LicenseMapper extends DescriptorMapper<LicenseType, LicenseDesc
         }
         LicenseChoiceType.Expression expression = licenseChoiceType.getExpression();
         return expression != null ?
-            singletonList(LicenseExpressionMapper.INSTANCE.toDescriptor(expression, scanner)) :
+            singletonList(Mappers.getMapper(LicenseExpressionMapper.class)
+                .toDescriptor(expression, scanner)) :
             licenseChoiceType == null ?
                 emptyList() :
                 licenseChoiceType.getLicense()

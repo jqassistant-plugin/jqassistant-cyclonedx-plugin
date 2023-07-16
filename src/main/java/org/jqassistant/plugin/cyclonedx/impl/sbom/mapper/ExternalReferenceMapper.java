@@ -8,12 +8,9 @@ import org.jqassistant.plugin.cyclonedx.impl.mapper.DescriptorMapper;
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
 @Mapper(uses = { HashMapper.class })
 public interface ExternalReferenceMapper extends DescriptorMapper<ExternalReference, ExternalReferenceDescriptor> {
-
-    ExternalReferenceMapper INSTANCE = Mappers.getMapper(ExternalReferenceMapper.class);
 
     @Mapping(target = "urls", source = "url")
     @Mapping(target = "hashes", source = "hashes.hash")

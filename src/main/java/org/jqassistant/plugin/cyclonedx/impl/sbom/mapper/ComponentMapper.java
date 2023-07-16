@@ -1,5 +1,9 @@
 package org.jqassistant.plugin.cyclonedx.impl.sbom.mapper;
 
+import java.util.List;
+
+import javax.xml.bind.JAXBElement;
+
 import com.buschmais.jqassistant.core.scanner.api.Scanner;
 
 import org.jqassistant.plugin.cyclonedx.api.model.sbom.ComponentDescriptor;
@@ -9,17 +13,27 @@ import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import static org.mapstruct.factory.Mappers.getMapper;
+import static java.util.stream.Collectors.toList;
 
 @Mapper(uses = { ExternalReferenceMapper.class, HashMapper.class, LicenseMapper.class })
 public interface ComponentMapper extends DescriptorMapper<Component, ComponentDescriptor> {
 
-    ComponentMapper INSTANCE = getMapper(ComponentMapper.class);
-
+    @Mapping(target = "components", source = "components.componentAndAny")
     @Mapping(target = "dependencies", ignore = true)
     @Mapping(target = "externalReferences", source = "externalReferences.reference")
     @Mapping(target = "hashes", source = "hashes.hash")
     @Override
     ComponentDescriptor toDescriptor(Component type, @Context Scanner scanner);
+
+    default List<ComponentDescriptor> map(List<Object> componentAndAny, @Context Scanner scanner) {
+        return componentAndAny == null ?
+            null :
+            componentAndAny.stream()
+                .filter(element -> element instanceof JAXBElement<?> && ((JAXBElement<?>) element).getDeclaredType()
+                    .equals(Component.class))
+                .map(jaxbElement -> ((JAXBElement<Component>) jaxbElement).getValue())
+                .map(component -> toDescriptor(component, scanner))
+                .collect(toList());
+    }
 
 }
