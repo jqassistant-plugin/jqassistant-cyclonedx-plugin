@@ -8,7 +8,8 @@ import com.buschmais.xo.neo4j.api.annotation.Relation;
 import org.jqassistant.plugin.cyclonedx.api.model.CycloneDXDescriptor;
 
 @Label("Component")
-public interface ComponentDescriptor extends CycloneDXDescriptor, BomRefTemplate, HashesTemplate, LicensesTemplate, ExternalReferencesTemplate, ComponentsTemplate {
+public interface ComponentDescriptor
+    extends CycloneDXDescriptor, BomRefTemplate, HashesTemplate, LicensesTemplate, ExternalReferencesTemplate, ComponentsTemplate {
 
     String getType();
 
@@ -17,6 +18,22 @@ public interface ComponentDescriptor extends CycloneDXDescriptor, BomRefTemplate
     String getPublisher();
 
     void setPublisher(String publisher);
+
+    String getAuthor();
+
+    void setAuthor(String author);
+
+    String getCopyright();
+
+    void setCopyright(String copyright);
+
+    String getCpe();
+
+    void setCpe(String cpe);
+
+    String getMimeType();
+
+    void setMimeType(String mimeType);
 
     String getGroup();
 
@@ -41,6 +58,10 @@ public interface ComponentDescriptor extends CycloneDXDescriptor, BomRefTemplate
     String getPurl();
 
     void setPurl(String purl);
+
+    Boolean isModified();
+
+    void setModified(Boolean modified);
 
     @Relation("DEPENDS_ON")
     List<ComponentDescriptor> getDependencies();

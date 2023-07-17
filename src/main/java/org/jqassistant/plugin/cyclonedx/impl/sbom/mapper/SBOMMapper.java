@@ -23,6 +23,8 @@ public interface SBOMMapper extends DescriptorEnricher<Bom, SBOMDescriptor> {
     @Override
     @Mapping(target = "externalReferences", source = "externalReferences.reference")
     @Mapping(target = "components", source = "components.componentAndAny")
+    @BeanMapping(ignoreUnmappedSourceProperties = { "services", "dependencies", "compositions", "properties", "vulnerabilities", "annotations", "formulation",
+        "any", "otherAttributes" })
     SBOMDescriptor toDescriptor(Bom bom, @MappingTarget SBOMDescriptor sbomDescriptor, @Context Scanner scanner);
 
     @AfterMapping

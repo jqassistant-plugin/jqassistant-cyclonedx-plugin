@@ -9,6 +9,7 @@ import com.buschmais.jqassistant.core.scanner.api.Scanner;
 import org.jqassistant.plugin.cyclonedx.api.model.sbom.ComponentDescriptor;
 import org.jqassistant.plugin.cyclonedx.generated.bom.Component;
 import org.jqassistant.plugin.cyclonedx.impl.mapper.DescriptorMapper;
+import org.mapstruct.BeanMapping;
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -23,6 +24,8 @@ public interface ComponentMapper extends DescriptorMapper<Component, ComponentDe
     @Mapping(target = "dependencies", ignore = true)
     @Mapping(target = "externalReferences", source = "externalReferences.reference")
     @Mapping(target = "hashes", source = "hashes.hash")
+    @BeanMapping(ignoreUnmappedSourceProperties = { "supplier", "swid", "pedigree", "properties", "evidence", "releaseNotes", "modelCard", "data", "any",
+        "otherAttributes" })
     ComponentDescriptor toDescriptor(Component type, @Context Scanner scanner);
 
     default List<ComponentDescriptor> map(List<Object> componentAndAny, @Context Scanner scanner) {
