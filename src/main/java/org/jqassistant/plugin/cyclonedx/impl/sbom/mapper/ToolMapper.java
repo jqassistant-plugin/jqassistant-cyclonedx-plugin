@@ -12,9 +12,9 @@ import org.mapstruct.Mapping;
 @Mapper(uses = { HashMapper.class, ExternalReferenceMapper.class })
 public interface ToolMapper extends DescriptorMapper<ToolType, ToolDescriptor> {
 
+    @Override
     @Mapping(target = "externalReferences", source = "externalReferences.reference")
     @Mapping(target = "hashes", source = "hashes.hash")
-    @Override
     ToolDescriptor toDescriptor(ToolType type, @Context Scanner scanner);
 
 }

@@ -15,14 +15,14 @@ import org.mapstruct.Mapping;
 
 import static java.util.stream.Collectors.toList;
 
-@Mapper(uses = { ExternalReferenceMapper.class, HashMapper.class, LicenseMapper.class })
+@Mapper(uses = { ExternalReferenceMapper.class, HashMapper.class, LicenseChoiceMapper.class })
 public interface ComponentMapper extends DescriptorMapper<Component, ComponentDescriptor> {
 
+    @Override
     @Mapping(target = "components", source = "components.componentAndAny")
     @Mapping(target = "dependencies", ignore = true)
     @Mapping(target = "externalReferences", source = "externalReferences.reference")
     @Mapping(target = "hashes", source = "hashes.hash")
-    @Override
     ComponentDescriptor toDescriptor(Component type, @Context Scanner scanner);
 
     default List<ComponentDescriptor> map(List<Object> componentAndAny, @Context Scanner scanner) {

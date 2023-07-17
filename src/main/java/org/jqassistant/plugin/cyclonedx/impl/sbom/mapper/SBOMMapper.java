@@ -9,20 +9,21 @@ import org.jqassistant.plugin.cyclonedx.api.model.sbom.ComponentDescriptor;
 import org.jqassistant.plugin.cyclonedx.api.model.sbom.SBOMDescriptor;
 import org.jqassistant.plugin.cyclonedx.generated.bom.Bom;
 import org.jqassistant.plugin.cyclonedx.generated.bom.DependencyType;
-import org.jqassistant.plugin.cyclonedx.impl.mapper.DescriptorResolver;
+import org.jqassistant.plugin.cyclonedx.impl.mapper.DescriptorEnricher;
 import org.jqassistant.plugin.cyclonedx.impl.resolver.Resolvers;
 import org.mapstruct.*;
 
 import static org.mapstruct.factory.Mappers.getMapper;
 
 @Mapper(uses = { MetadataMapper.class, ComponentMapper.class, ExternalReferenceMapper.class })
-public interface SBOMMapper extends DescriptorResolver<Bom, SBOMDescriptor> {
+public interface SBOMMapper extends DescriptorEnricher<Bom, SBOMDescriptor> {
 
     SBOMMapper INSTANCE = getMapper(SBOMMapper.class);
 
+    @Override
     @Mapping(target = "externalReferences", source = "externalReferences.reference")
     @Mapping(target = "components", source = "components.componentAndAny")
-    void toDescriptor(Bom bom, @MappingTarget SBOMDescriptor sbomDescriptor, @Context Scanner scanner);
+    SBOMDescriptor toDescriptor(Bom bom, @MappingTarget SBOMDescriptor sbomDescriptor, @Context Scanner scanner);
 
     @AfterMapping
     default void resolveDependencyTree(Bom bom, @Context Scanner scanner) {

@@ -9,11 +9,11 @@ import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(uses = { ComponentMapper.class, LicenseMapper.class, ToolMapper.class })
+@Mapper(uses = { ComponentMapper.class, LicenseChoiceMapper.class, ToolMapper.class })
 public interface MetadataMapper extends DescriptorMapper<Metadata, MetadataDescriptor> {
 
-    @Mapping(target = "tools", source = "tools.tool")
     @Override
+    @Mapping(target = "tools", source = "tools.tool")
     MetadataDescriptor toDescriptor(Metadata type, @Context Scanner scanner);
 
 }

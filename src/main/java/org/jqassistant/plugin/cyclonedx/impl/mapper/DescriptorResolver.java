@@ -5,11 +5,9 @@ import com.buschmais.jqassistant.core.store.api.model.Descriptor;
 
 import org.jqassistant.plugin.cyclonedx.impl.resolver.Resolvers;
 import org.mapstruct.Context;
-import org.mapstruct.MapperConfig;
 import org.mapstruct.ObjectFactory;
 import org.mapstruct.TargetType;
 
-@MapperConfig
 public interface DescriptorResolver<T, D extends Descriptor> {
 
     /**

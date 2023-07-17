@@ -12,9 +12,9 @@ import org.mapstruct.Mapping;
 @Mapper(uses = { HashMapper.class })
 public interface ExternalReferenceMapper extends DescriptorMapper<ExternalReference, ExternalReferenceDescriptor> {
 
+    @Override
     @Mapping(target = "urls", source = "url")
     @Mapping(target = "hashes", source = "hashes.hash")
-    @Override
     ExternalReferenceDescriptor toDescriptor(ExternalReference type, @Context Scanner scanner);
 
 }

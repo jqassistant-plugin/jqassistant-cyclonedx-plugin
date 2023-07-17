@@ -12,11 +12,11 @@ import org.mapstruct.Mapping;
 @Mapper
 public interface LicenseExpressionMapper extends DescriptorMapper<LicenseChoiceType.Expression, LicenseDescriptor> {
 
+    @Override
     @Mapping(target = "expression", source = "value")
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "name", ignore = true)
     @Mapping(target = "url", ignore = true)
-    @Override
     LicenseDescriptor toDescriptor(LicenseChoiceType.Expression type, @Context Scanner scanner);
 
 }
