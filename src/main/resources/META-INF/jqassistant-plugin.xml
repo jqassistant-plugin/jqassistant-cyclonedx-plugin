@@ -1,7 +1,7 @@
-<jqassistant-plugin xmlns="http://schema.jqassistant.org/plugin/v1.8"
+<jqassistant-plugin xmlns="http://schema.jqassistant.org/plugin/v1.10"
                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                    xsi:schemaLocation="http://schema.jqassistant.org/plugin/v1.8 https://schema.jqassistant.org/plugin/jqassistant-plugin-v1.8.xsd"
-                    name="CycloneDX">
+                    xsi:schemaLocation="http://schema.jqassistant.org/plugin/v1.10 https://schema.jqassistant.org/plugin/jqassistant-plugin-v1.8.xsd"
+                    name="jQAssistant CycloneDX Plugin" id="jqassistant.plugin.cyclonedx">
     <description>Provides a scanner for CycloneDX SBOM files.</description>
     <model>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.ComponentDescriptor</class>
@@ -12,6 +12,9 @@
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.SBOMXmlFileDescriptor</class>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.ToolDescriptor</class>
     </model>
+    <scope>
+        <class>org.jqassistant.plugin.cyclonedx.impl.CycloneDXScope</class>
+    </scope>
     <scanner>
         <class>org.jqassistant.plugin.cyclonedx.impl.sbom.SBOMXmlScannerPlugin</class>
     </scanner>

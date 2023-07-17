@@ -15,7 +15,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class BomScannerIT extends AbstractPluginIT {
 
     @Test
-    @TestStore(type = TestStore.Type.REMOTE)
     void xmlBOM() {
         File file = ClasspathResource.getFile(BomScannerIT.class, "/bom.xml");
         Descriptor descriptor = getScanner().scan(file, file.getAbsolutePath(), NONE);
