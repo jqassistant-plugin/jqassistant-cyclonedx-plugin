@@ -8,8 +8,7 @@ import com.buschmais.xo.neo4j.api.annotation.Relation;
 import org.jqassistant.plugin.cyclonedx.api.model.CycloneDXDescriptor;
 
 @Label("Component")
-public interface ComponentDescriptor
-    extends CycloneDXDescriptor, BomRefTemplate, HashesTemplate, LicensesTemplate, ExternalReferencesTemplate, ComponentsTemplate {
+public interface ComponentDescriptor extends CycloneDXDescriptor, BomRefTemplate, HashesTemplate, LicensesTemplate, ExternalReferencesTemplate, ComponentsTemplate {
 
     String getType();
 

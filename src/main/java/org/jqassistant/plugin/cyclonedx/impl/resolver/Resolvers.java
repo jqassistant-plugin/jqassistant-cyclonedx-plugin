@@ -1,18 +1,18 @@
 package org.jqassistant.plugin.cyclonedx.impl.resolver;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Function;
 
 import com.buschmais.jqassistant.core.scanner.api.ScannerContext;
 import com.buschmais.jqassistant.core.store.api.model.Descriptor;
 
-import lombok.Builder;
-import lombok.Singular;
+import lombok.RequiredArgsConstructor;
 
-@Builder
+import static lombok.AccessLevel.PRIVATE;
+
+@RequiredArgsConstructor(access = PRIVATE)
 public class Resolvers {
 
-    @Singular
     private final Map<Class<?>, Resolver<?, ? extends Descriptor>> resolvers;
 
     public <T, D extends Descriptor> D resolve(T type, Class<D> descriptorType, ScannerContext scannerContext) {
@@ -22,5 +22,22 @@ public class Resolvers {
                 .create(descriptorType);
         }
         return (D) resolver.resolve(type, scannerContext);
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private final Map<Class<?>, Resolver<?, ? extends Descriptor>> resolvers = new HashMap<>();
+
+        public <T, D extends Descriptor> Builder resolver(Resolver<T, D> resolver) {
+            resolvers.put(resolver.getType(), resolver);
+            return this;
+        }
+
+        public Resolvers build() {
+            return new Resolvers(resolvers);
+        }
     }
 }

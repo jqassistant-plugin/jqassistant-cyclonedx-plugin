@@ -1,25 +1,27 @@
 package org.jqassistant.plugin.cyclonedx.impl.sbom;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+
 import com.buschmais.jqassistant.core.scanner.api.Scanner;
 import com.buschmais.jqassistant.core.scanner.api.ScannerContext;
 import com.buschmais.jqassistant.core.scanner.api.Scope;
 import com.buschmais.jqassistant.core.shared.xml.JAXBUnmarshaller;
 import com.buschmais.jqassistant.plugin.common.api.scanner.filesystem.FileResource;
 import com.buschmais.jqassistant.plugin.xml.api.scanner.AbstractXmlFileScannerPlugin;
-import org.jqassistant.plugin.cyclonedx.api.model.sbom.SBOMXmlFileDescriptor;
-import org.jqassistant.plugin.cyclonedx.generated.bom.Bom;
-import org.jqassistant.plugin.cyclonedx.generated.bom.Component;
-import org.jqassistant.plugin.cyclonedx.generated.bom.DependencyType;
-import org.jqassistant.plugin.cyclonedx.generated.bom.LicenseType;
-import org.jqassistant.plugin.cyclonedx.impl.resolver.Resolvers;
-import org.jqassistant.plugin.cyclonedx.impl.sbom.mapper.*;
-import org.xml.sax.SAXException;
 
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
+import org.jqassistant.plugin.cyclonedx.api.model.sbom.ComponentDescriptor;
+import org.jqassistant.plugin.cyclonedx.api.model.sbom.LicenseDescriptor;
+import org.jqassistant.plugin.cyclonedx.api.model.sbom.SBOMXmlFileDescriptor;
+import org.jqassistant.plugin.cyclonedx.generated.bom.*;
+import org.jqassistant.plugin.cyclonedx.impl.resolver.Resolvers;
+import org.jqassistant.plugin.cyclonedx.impl.sbom.mapper.BomRefResolver;
+import org.jqassistant.plugin.cyclonedx.impl.sbom.mapper.SBOMMapper;
+import org.xml.sax.SAXException;
 
 public class SBOMXmlScannerPlugin extends AbstractXmlFileScannerPlugin<SBOMXmlFileDescriptor> {
 
@@ -52,11 +54,11 @@ public class SBOMXmlScannerPlugin extends AbstractXmlFileScannerPlugin<SBOMXmlFi
         throws IOException {
         ScannerContext scannerContext = scanner.getContext();
         Bom bom = unmarshal(fileResource);
-        BomRefResolver bomRefResolver = new BomRefResolver();
         Resolvers resolvers = Resolvers.builder()
-            .resolver(Component.class, new ComponentResolver(bomRefResolver))
-            .resolver(DependencyType.class, new DependencyResolver(bomRefResolver))
-            .resolver(LicenseType.class, new LicenseResolver(bomRefResolver))
+            .resolver(new BomRefResolver<>(Component.class, component -> component.getBomRef(), ComponentDescriptor.class))
+            .resolver(new BomRefResolver<>(DependencyType.class, dependencyType -> dependencyType.getRef(), ComponentDescriptor.class))
+            .resolver(new BomRefResolver<>(LicenseType.class, licenseType -> licenseType.getBomRef(), LicenseDescriptor.class))
+            .resolver(new BomRefResolver<>(LicenseChoiceType.Expression.class, expression -> expression.getBomRef(), LicenseDescriptor.class))
             .build();
         scannerContext.push(Resolvers.class, resolvers);
         try {
