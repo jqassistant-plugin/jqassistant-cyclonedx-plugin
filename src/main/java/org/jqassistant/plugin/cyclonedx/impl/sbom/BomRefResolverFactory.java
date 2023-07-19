@@ -6,9 +6,9 @@ import java.util.function.Function;
 
 import com.buschmais.jqassistant.core.scanner.api.ScannerContext;
 
-import lombok.RequiredArgsConstructor;
 import org.jqassistant.plugin.cyclonedx.api.model.CycloneDXDescriptor;
 import org.jqassistant.plugin.cyclonedx.api.model.sbom.BomRefTemplate;
+import org.jqassistant.plugin.cyclonedx.impl.resolver.AbstractResolver;
 import org.jqassistant.plugin.cyclonedx.impl.resolver.Resolver;
 
 public class BomRefResolverFactory {
@@ -20,34 +20,20 @@ public class BomRefResolverFactory {
         return new BomRefResolver<>(type, bomRefFunction, descriptorType);
     }
 
-    @RequiredArgsConstructor
-    private class BomRefResolver<V, D extends CycloneDXDescriptor & BomRefTemplate> implements Resolver<V, D> {
-
-        private final Class<V> type;
+    private class BomRefResolver<V, D extends CycloneDXDescriptor & BomRefTemplate> extends AbstractResolver<V, D> {
 
         private final Function<V, String> bomRefFunction;
 
-        private final Class<D> descriptorType;
-
-        @Override
-        public Class<V> getValueType() {
-            return type;
-        }
-
-        @Override
-        public Class<D> getDescriptorType() {
-            return descriptorType;
+        private BomRefResolver(Class<V> valueClass, Function<V, String> bomRefFunction, Class<D> descriptorClass) {
+            super(valueClass, descriptorClass);
+            this.bomRefFunction = bomRefFunction;
         }
 
         @Override
         public D resolve(V value, ScannerContext scannerContext) {
             String bomRef = bomRefFunction.apply(value);
-            return (D) bomRefs.computeIfAbsent(bomRef, key -> {
-                BomRefTemplate bomRefTemplate = scannerContext.getStore()
-                    .create(descriptorType);
-                bomRefTemplate.setBomRef(bomRef);
-                return bomRefTemplate;
-            });
+            return (D) bomRefs.computeIfAbsent(bomRef, key -> scannerContext.getStore()
+                .create(descriptorType, bomRefTemplate -> bomRefTemplate.setBomRef(key)));
         }
     }
 }
