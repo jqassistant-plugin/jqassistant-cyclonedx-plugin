@@ -16,6 +16,7 @@ import com.buschmais.jqassistant.plugin.xml.api.scanner.AbstractXmlFileScannerPl
 
 import org.jqassistant.plugin.cyclonedx.api.model.sbom.ComponentDescriptor;
 import org.jqassistant.plugin.cyclonedx.api.model.sbom.LicenseDescriptor;
+import org.jqassistant.plugin.cyclonedx.api.model.sbom.OrganizatonalContactDescriptor;
 import org.jqassistant.plugin.cyclonedx.api.model.sbom.SBOMXmlFileDescriptor;
 import org.jqassistant.plugin.cyclonedx.generated.bom.xml.*;
 import org.jqassistant.plugin.cyclonedx.impl.resolver.ResolverFactory;
@@ -60,6 +61,8 @@ public class SBOMXmlScannerPlugin extends AbstractXmlFileScannerPlugin<SBOMXmlFi
             .resolver(bomRefResolverFactory.resolver(DependencyType.class, dependencyType -> dependencyType.getRef(), ComponentDescriptor.class))
             .resolver(bomRefResolverFactory.resolver(LicenseType.class, licenseType -> licenseType.getBomRef(), LicenseDescriptor.class))
             .resolver(bomRefResolverFactory.resolver(LicenseChoiceType.Expression.class, expression -> expression.getBomRef(), LicenseDescriptor.class))
+            .resolver(bomRefResolverFactory.resolver(OrganizationalContact.class, organizationalContact -> organizationalContact.getBomRef(),
+                OrganizatonalContactDescriptor.class))
             .build();
         ScannerContext scannerContext = scanner.getContext();
         scannerContext.push(ResolverFactory.class, resolverFactory);

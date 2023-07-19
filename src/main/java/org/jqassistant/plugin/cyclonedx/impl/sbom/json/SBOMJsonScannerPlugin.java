@@ -12,10 +12,12 @@ import com.buschmais.jqassistant.plugin.common.api.scanner.filesystem.FileResour
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jqassistant.plugin.cyclonedx.api.model.sbom.ComponentDescriptor;
+import org.jqassistant.plugin.cyclonedx.api.model.sbom.OrganizatonalContactDescriptor;
 import org.jqassistant.plugin.cyclonedx.api.model.sbom.SBOMJsonFileDescriptor;
 import org.jqassistant.plugin.cyclonedx.generated.bom.json.Bom15Schema;
 import org.jqassistant.plugin.cyclonedx.generated.bom.json.Component;
 import org.jqassistant.plugin.cyclonedx.generated.bom.json.Dependency;
+import org.jqassistant.plugin.cyclonedx.generated.bom.json.OrganizationalContact;
 import org.jqassistant.plugin.cyclonedx.impl.resolver.ResolverFactory;
 import org.jqassistant.plugin.cyclonedx.impl.sbom.BomRefResolverFactory;
 import org.jqassistant.plugin.cyclonedx.impl.sbom.json.mapper.SBOMMapper;
@@ -50,6 +52,8 @@ public class SBOMJsonScannerPlugin extends AbstractScannerPlugin<FileResource, S
             .resolver(bomRefResolverFactory.resolver(Dependency.class, dependency -> dependency.getRef()
                 .toString(), ComponentDescriptor.class))
             .resolver(bomRefResolverFactory.resolver(String.class, bomRef -> bomRef, ComponentDescriptor.class))
+            .resolver(bomRefResolverFactory.resolver(OrganizationalContact.class, organizationalContact -> organizationalContact.getBomRef(),
+                OrganizatonalContactDescriptor.class))
             .build();
         scannerContext.push(ResolverFactory.class, resolverFactory);
         try {

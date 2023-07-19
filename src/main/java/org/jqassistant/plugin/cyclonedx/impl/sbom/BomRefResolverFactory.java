@@ -32,6 +32,10 @@ public class BomRefResolverFactory {
         @Override
         public D resolve(V value, ScannerContext scannerContext) {
             String bomRef = bomRefFunction.apply(value);
+            if (bomRef == null) {
+                return scannerContext.getStore()
+                    .create(descriptorType);
+            }
             return (D) bomRefs.computeIfAbsent(bomRef, key -> scannerContext.getStore()
                 .create(descriptorType, bomRefTemplate -> bomRefTemplate.setBomRef(key)));
         }
