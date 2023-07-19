@@ -16,21 +16,11 @@ public class ResolverFactory {
     private final Map<Class<?>, Resolver<?, ?>> resolvers;
 
     public <V, D extends Descriptor> Resolver<V, D> getResolver(V value, Class<D> descriptorType) {
-        return getResolver(value.getClass(), descriptorType);
+        return getResolver((Class<V>) value.getClass(), descriptorType);
     }
 
-    public <V, D extends Descriptor> Resolver<V, D> getResolver(Class<?> valueType, Class<D> descriptorType) {
-        return (Resolver<V, D>) resolvers.computeIfAbsent(valueType, t -> new Resolver<V, D>() {
-            @Override
-            public Class<V> getValueType() {
-                return (Class<V>) t.getClass();
-            }
-
-            @Override
-            public Class<D> getDescriptorType() {
-                return descriptorType;
-            }
-
+    public <V, D extends Descriptor> Resolver<V, D> getResolver(Class<V> valueType, Class<D> descriptorType) {
+        return (Resolver<V, D>) resolvers.computeIfAbsent(valueType, v -> new AbstractResolver<V, D>(valueType, descriptorType) {
             @Override
             public D resolve(V type, ScannerContext scannerContext) {
                 return scannerContext.getStore()
