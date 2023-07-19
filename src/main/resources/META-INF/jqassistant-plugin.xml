@@ -14,7 +14,7 @@
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.ToolDescriptor</class>
     </model>
     <scope>
-        <class>org.jqassistant.plugin.cyclonedx.impl.CycloneDXScope</class>
+        <class>org.jqassistant.plugin.cyclonedx.api.CycloneDXScope</class>
     </scope>
     <scanner>
         <class>org.jqassistant.plugin.cyclonedx.impl.sbom.json.SBOMJsonScannerPlugin</class>

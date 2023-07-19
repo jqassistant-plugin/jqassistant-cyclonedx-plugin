@@ -1,4 +1,4 @@
-package org.jqassistant.plugin.cyclonedx.impl;
+package org.jqassistant.plugin.cyclonedx.api;
 
 import com.buschmais.jqassistant.core.scanner.api.Scope;
 
