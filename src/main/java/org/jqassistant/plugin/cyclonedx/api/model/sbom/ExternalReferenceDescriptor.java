@@ -18,9 +18,9 @@ public interface ExternalReferenceDescriptor extends CycloneDXDescriptor {
 
     void setType(String type);
 
-    String[] getUrls();
+    String getUrl();
 
-    void setUrls(String[] url);
+    void setUrl(String url);
 
     @Relation("HAS_HASH")
     List<HashDescriptor> getHashes();

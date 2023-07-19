@@ -6,6 +6,7 @@ import com.buschmais.jqassistant.core.shared.io.ClasspathResource;
 import com.buschmais.jqassistant.core.store.api.model.Descriptor;
 import com.buschmais.jqassistant.core.test.plugin.AbstractPluginIT;
 
+import org.jqassistant.plugin.cyclonedx.api.model.sbom.SBOMJsonFileDescriptor;
 import org.jqassistant.plugin.cyclonedx.api.model.sbom.SBOMXmlFileDescriptor;
 import org.junit.jupiter.api.Test;
 
@@ -24,4 +25,13 @@ public class BomScannerIT extends AbstractPluginIT {
         store.commitTransaction();
     }
 
+    @Test
+    void jsonBOM() {
+        File file = ClasspathResource.getFile(BomScannerIT.class, "/bom.json");
+        Descriptor descriptor = getScanner().scan(file, file.getAbsolutePath(), NONE);
+        store.beginTransaction();
+        assertThat(descriptor).isInstanceOf(SBOMJsonFileDescriptor.class);
+        SBOMJsonFileDescriptor sbomJsonFileDescriptor = (SBOMJsonFileDescriptor) descriptor;
+        store.commitTransaction();
+    }
 }

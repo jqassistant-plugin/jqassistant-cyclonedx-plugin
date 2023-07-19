@@ -1,11 +1,14 @@
 package org.jqassistant.plugin.cyclonedx.impl.resolver;
 
 import com.buschmais.jqassistant.core.scanner.api.ScannerContext;
+import com.buschmais.jqassistant.core.store.api.model.Descriptor;
 
-public interface Resolver<T, D> {
+public interface Resolver<V, D extends Descriptor> {
 
-    Class<T> getType();
+    Class<V> getValueType();
 
-    D resolve(T type, ScannerContext scannerContext);
+    Class<D> getDescriptorType();
+
+    D resolve(V type, ScannerContext scannerContext);
 
 }

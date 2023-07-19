@@ -1,4 +1,4 @@
-package org.jqassistant.plugin.cyclonedx.impl.sbom.mapper;
+package org.jqassistant.plugin.cyclonedx.impl.sbom.xml.mapper;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import javax.xml.bind.JAXBElement;
 import com.buschmais.jqassistant.core.scanner.api.Scanner;
 
 import org.jqassistant.plugin.cyclonedx.api.model.sbom.ComponentDescriptor;
-import org.jqassistant.plugin.cyclonedx.generated.bom.Component;
+import org.jqassistant.plugin.cyclonedx.generated.bom.xml.Component;
 import org.jqassistant.plugin.cyclonedx.impl.mapper.DescriptorMapper;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Context;

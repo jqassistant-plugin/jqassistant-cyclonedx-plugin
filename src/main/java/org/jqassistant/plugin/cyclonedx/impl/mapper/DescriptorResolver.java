@@ -3,7 +3,7 @@ package org.jqassistant.plugin.cyclonedx.impl.mapper;
 import com.buschmais.jqassistant.core.scanner.api.Scanner;
 import com.buschmais.jqassistant.core.store.api.model.Descriptor;
 
-import org.jqassistant.plugin.cyclonedx.impl.resolver.Resolvers;
+import org.jqassistant.plugin.cyclonedx.impl.resolver.ResolverFactory;
 import org.mapstruct.Context;
 import org.mapstruct.ObjectFactory;
 import org.mapstruct.TargetType;
@@ -13,7 +13,7 @@ public interface DescriptorResolver<T, D extends Descriptor> {
     /**
      * Factory method for {@link Descriptor}s.
      * <p>
-     * This method uses the {@link Resolvers} instance provided by the scanner context. This class allow registration of specific {@link org.jqassistant.plugin.cyclonedx.impl.resolver.Resolver}s.
+     * This method uses the {@link ResolverFactory} instance provided by the scanner context. This class allow registration of specific {@link org.jqassistant.plugin.cyclonedx.impl.resolver.Resolver}s.
      *
      * @param type
      *     The object the {@link Descriptor} is resolved for.
@@ -26,9 +26,9 @@ public interface DescriptorResolver<T, D extends Descriptor> {
     @ObjectFactory
     default D resolve(T type, @TargetType Class<D> descriptorType, @Context Scanner scanner) {
         return scanner.getContext()
-            .peek(Resolvers.class)
-            .resolve(type, descriptorType, scanner.getContext());
+            .peek(ResolverFactory.class)
+            .getResolver(type, descriptorType)
+            .resolve(type, scanner.getContext());
     }
-
 
 }

@@ -1,4 +1,4 @@
-package org.jqassistant.plugin.cyclonedx.impl.sbom;
+package org.jqassistant.plugin.cyclonedx.impl.sbom.xml;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,10 +17,10 @@ import com.buschmais.jqassistant.plugin.xml.api.scanner.AbstractXmlFileScannerPl
 import org.jqassistant.plugin.cyclonedx.api.model.sbom.ComponentDescriptor;
 import org.jqassistant.plugin.cyclonedx.api.model.sbom.LicenseDescriptor;
 import org.jqassistant.plugin.cyclonedx.api.model.sbom.SBOMXmlFileDescriptor;
-import org.jqassistant.plugin.cyclonedx.generated.bom.*;
-import org.jqassistant.plugin.cyclonedx.impl.resolver.Resolvers;
-import org.jqassistant.plugin.cyclonedx.impl.sbom.mapper.BomRefResolver;
-import org.jqassistant.plugin.cyclonedx.impl.sbom.mapper.SBOMMapper;
+import org.jqassistant.plugin.cyclonedx.generated.bom.xml.*;
+import org.jqassistant.plugin.cyclonedx.impl.resolver.ResolverFactory;
+import org.jqassistant.plugin.cyclonedx.impl.sbom.BomRefResolverFactory;
+import org.jqassistant.plugin.cyclonedx.impl.sbom.xml.mapper.SBOMMapper;
 import org.xml.sax.SAXException;
 
 public class SBOMXmlScannerPlugin extends AbstractXmlFileScannerPlugin<SBOMXmlFileDescriptor> {
@@ -52,20 +52,22 @@ public class SBOMXmlScannerPlugin extends AbstractXmlFileScannerPlugin<SBOMXmlFi
     @Override
     public SBOMXmlFileDescriptor scan(FileResource fileResource, SBOMXmlFileDescriptor sbomXmlFileDescriptor, String path, Scope scope, Scanner scanner)
         throws IOException {
-        ScannerContext scannerContext = scanner.getContext();
         Bom bom = unmarshal(fileResource);
-        Resolvers resolvers = Resolvers.builder()
-            .resolver(new BomRefResolver<>(Component.class, component -> component.getBomRef(), ComponentDescriptor.class))
-            .resolver(new BomRefResolver<>(DependencyType.class, dependencyType -> dependencyType.getRef(), ComponentDescriptor.class))
-            .resolver(new BomRefResolver<>(LicenseType.class, licenseType -> licenseType.getBomRef(), LicenseDescriptor.class))
-            .resolver(new BomRefResolver<>(LicenseChoiceType.Expression.class, expression -> expression.getBomRef(), LicenseDescriptor.class))
+
+        BomRefResolverFactory bomRefResolverFactory = new BomRefResolverFactory();
+        ResolverFactory resolverFactory = ResolverFactory.builder()
+            .resolver(bomRefResolverFactory.resolver(Component.class, component -> component.getBomRef(), ComponentDescriptor.class))
+            .resolver(bomRefResolverFactory.resolver(DependencyType.class, dependencyType -> dependencyType.getRef(), ComponentDescriptor.class))
+            .resolver(bomRefResolverFactory.resolver(LicenseType.class, licenseType -> licenseType.getBomRef(), LicenseDescriptor.class))
+            .resolver(bomRefResolverFactory.resolver(LicenseChoiceType.Expression.class, expression -> expression.getBomRef(), LicenseDescriptor.class))
             .build();
-        scannerContext.push(Resolvers.class, resolvers);
+        ScannerContext scannerContext = scanner.getContext();
+        scannerContext.push(ResolverFactory.class, resolverFactory);
         try {
             SBOMMapper.INSTANCE.toDescriptor(bom, sbomXmlFileDescriptor, scanner);
             return sbomXmlFileDescriptor;
         } finally {
-            scannerContext.pop(Resolvers.class);
+            scannerContext.pop(ResolverFactory.class);
         }
     }
 

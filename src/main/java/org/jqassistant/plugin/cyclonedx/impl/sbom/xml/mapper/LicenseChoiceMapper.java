@@ -1,11 +1,11 @@
-package org.jqassistant.plugin.cyclonedx.impl.sbom.mapper;
+package org.jqassistant.plugin.cyclonedx.impl.sbom.xml.mapper;
 
 import java.util.List;
 
 import com.buschmais.jqassistant.core.scanner.api.Scanner;
 
 import org.jqassistant.plugin.cyclonedx.api.model.sbom.LicenseDescriptor;
-import org.jqassistant.plugin.cyclonedx.generated.bom.LicenseChoiceType;
+import org.jqassistant.plugin.cyclonedx.generated.bom.xml.LicenseChoiceType;
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 
