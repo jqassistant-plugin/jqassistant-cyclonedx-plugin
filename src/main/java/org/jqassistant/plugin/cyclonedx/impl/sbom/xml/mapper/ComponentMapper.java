@@ -16,7 +16,7 @@ import org.mapstruct.Mapping;
 
 import static java.util.stream.Collectors.toList;
 
-@Mapper(uses = { ExternalReferenceMapper.class, HashMapper.class, LicenseChoiceMapper.class })
+@Mapper(uses = { ExternalReferenceMapper.class, HashMapper.class, LicenseChoiceMapper.class, PropertyMapper.class })
 public interface ComponentMapper extends DescriptorMapper<Component, ComponentDescriptor> {
 
     @Override
@@ -24,8 +24,7 @@ public interface ComponentMapper extends DescriptorMapper<Component, ComponentDe
     @Mapping(target = "dependencies", ignore = true)
     @Mapping(target = "externalReferences", source = "externalReferences.reference")
     @Mapping(target = "hashes", source = "hashes.hash")
-    @BeanMapping(ignoreUnmappedSourceProperties = { "supplier", "swid", "pedigree", "properties", "evidence", "releaseNotes", "modelCard", "data", "any",
-        "otherAttributes" })
+    @BeanMapping(ignoreUnmappedSourceProperties = { "supplier", "swid", "pedigree", "evidence", "releaseNotes", "modelCard", "data", "any", "otherAttributes" })
     ComponentDescriptor toDescriptor(Component value, @Context Scanner scanner);
 
     default List<ComponentDescriptor> map(List<Object> componentAndAny, @Context Scanner scanner) {

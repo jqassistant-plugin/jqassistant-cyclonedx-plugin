@@ -9,11 +9,11 @@ import org.mapstruct.BeanMapping;
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 
-@Mapper(uses = { ComponentMapper.class, LicenseChoiceMapper.class, OrganizationContactMapper.class, JsonToolMapper.class })
+@Mapper(uses = { ComponentMapper.class, LicenseChoiceMapper.class, OrganizationContactMapper.class, JsonToolMapper.class, PropertyMapper.class })
 public interface MetadataMapper extends DescriptorMapper<Metadata, MetadataDescriptor> {
 
     @Override
-    @BeanMapping(ignoreUnmappedSourceProperties = { "lifecycles", "manufacture", "supplier", "properties" })
+    @BeanMapping(ignoreUnmappedSourceProperties = { "lifecycles", "manufacture", "supplier" })
     MetadataDescriptor toDescriptor(Metadata value, @Context Scanner scanner);
 
 }

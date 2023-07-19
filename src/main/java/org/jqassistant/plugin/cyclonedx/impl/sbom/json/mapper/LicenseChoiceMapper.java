@@ -25,17 +25,17 @@ public interface LicenseChoiceMapper {
     default List<LicenseDescriptor> mapLicenses(List<?> licences, @Context Scanner scanner) {
         return licences.stream()
             .filter(value -> value instanceof Map)
-            .map(license -> mapLicenseChoice((Map<String, ?>) license, scanner))
+            .map(license -> mapLicenseChoice((Map<String, Object>) license, scanner))
             .filter(license -> license != null)
             .collect(toList());
     }
 
-    static LicenseDescriptor mapLicenseChoice(Map<String, ?> licenseChoice, Scanner scanner) {
-        Map<String, String> licenseObject = (Map<String, String>) licenseChoice.get("license");
+    static LicenseDescriptor mapLicenseChoice(Map<String, Object> licenseChoice, Scanner scanner) {
+        Map<String, Object> licenseObject = (Map<String, Object>) licenseChoice.get("license");
         if (licenseObject != null) {
-            return LicenseMapper.INSTANCE.toDescriptor(licenseObject, scanner);
+            return JsonLicenseMapper.INSTANCE.toDescriptor(licenseObject, scanner);
         } else if (licenseChoice.containsKey("expression")) {
-            return LicenseMapper.INSTANCE.toDescriptor((Map<String, String>) licenseChoice, scanner);
+            return JsonLicenseMapper.INSTANCE.toDescriptor(licenseChoice, scanner);
         }
         return null;
     }

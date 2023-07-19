@@ -15,7 +15,7 @@ import org.mapstruct.*;
 
 import static org.mapstruct.factory.Mappers.getMapper;
 
-@Mapper(uses = { MetadataMapper.class, ComponentMapper.class, ExternalReferenceMapper.class })
+@Mapper(uses = { MetadataMapper.class, ComponentMapper.class, ExternalReferenceMapper.class, PropertyMapper.class })
 public interface SBOMMapper extends DescriptorEnricher<Bom, SBOMDescriptor> {
 
     SBOMMapper INSTANCE = getMapper(SBOMMapper.class);
@@ -23,8 +23,8 @@ public interface SBOMMapper extends DescriptorEnricher<Bom, SBOMDescriptor> {
     @Override
     @Mapping(target = "externalReferences", source = "externalReferences.reference")
     @Mapping(target = "components", source = "components.componentAndAny")
-    @BeanMapping(ignoreUnmappedSourceProperties = { "services", "dependencies", "compositions", "properties", "vulnerabilities", "annotations", "formulation",
-        "any", "otherAttributes" })
+    @BeanMapping(ignoreUnmappedSourceProperties = { "services", "dependencies", "compositions", "vulnerabilities", "annotations", "formulation", "any",
+        "otherAttributes" })
     SBOMDescriptor toDescriptor(Bom bom, @MappingTarget SBOMDescriptor sbomDescriptor, @Context Scanner scanner);
 
     @AfterMapping

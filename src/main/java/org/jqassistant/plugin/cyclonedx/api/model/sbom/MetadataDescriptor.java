@@ -9,7 +9,7 @@ import com.buschmais.xo.neo4j.api.annotation.Relation;
 import org.jqassistant.plugin.cyclonedx.api.model.CycloneDXDescriptor;
 
 @Label("Metadata")
-public interface MetadataDescriptor extends CycloneDXDescriptor, LicensesTemplate {
+public interface MetadataDescriptor extends CycloneDXDescriptor, LicensesTemplate, PropertiesTemplate {
 
     ZonedDateTime getTimestamp();
 

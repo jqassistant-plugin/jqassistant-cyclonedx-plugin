@@ -9,7 +9,7 @@ import org.jqassistant.plugin.cyclonedx.api.model.CycloneDXDescriptor;
 
 @Label("Component")
 public interface ComponentDescriptor
-    extends CycloneDXDescriptor, BomRefTemplate, HashesTemplate, LicensesTemplate, ExternalReferencesTemplate, ComponentsTemplate {
+    extends CycloneDXDescriptor, BomRefTemplate, HashesTemplate, LicensesTemplate, ExternalReferencesTemplate, ComponentsTemplate, PropertiesTemplate {
 
     String getType();
 

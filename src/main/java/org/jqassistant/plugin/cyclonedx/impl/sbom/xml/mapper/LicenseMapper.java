@@ -10,12 +10,12 @@ import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper
+@Mapper(uses = { PropertyMapper.class })
 public interface LicenseMapper extends DescriptorMapper<LicenseType, LicenseDescriptor> {
 
     @Override
     @Mapping(target = "expression", ignore = true)
-    @BeanMapping(ignoreUnmappedSourceProperties = { "text", "licensing", "properties", "any" })
+    @BeanMapping(ignoreUnmappedSourceProperties = { "text", "licensing", "any" })
     LicenseDescriptor toDescriptor(LicenseType value, @Context Scanner scanner);
 
 }
