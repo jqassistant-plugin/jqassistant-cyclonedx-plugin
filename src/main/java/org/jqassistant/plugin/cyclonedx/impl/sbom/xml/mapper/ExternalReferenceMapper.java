@@ -20,7 +20,7 @@ public interface ExternalReferenceMapper extends DescriptorMapper<ExternalRefere
     @Override
     @Mapping(target = "hashes", source = "hashes.hash")
     @BeanMapping(ignoreUnmappedSourceProperties = { "otherAttributes" })
-    ExternalReferenceDescriptor toDescriptor(ExternalReference type, @Context Scanner scanner);
+    ExternalReferenceDescriptor toDescriptor(ExternalReference value, @Context Scanner scanner);
 
     default String map(List<String> value) {
         return value == null ?

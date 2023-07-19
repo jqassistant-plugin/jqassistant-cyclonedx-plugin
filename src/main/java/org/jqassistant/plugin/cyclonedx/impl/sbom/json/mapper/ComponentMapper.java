@@ -17,6 +17,6 @@ public interface ComponentMapper extends DescriptorMapper<Component, ComponentDe
     @Mapping(target = "dependencies", ignore = true)
     @BeanMapping(ignoreUnmappedSourceProperties = { "signature", "supplier", "swid", "pedigree", "properties", "evidence", "releaseNotes", "modelCard",
         "data" })
-    ComponentDescriptor toDescriptor(Component type, @Context Scanner scanner);
+    ComponentDescriptor toDescriptor(Component value, @Context Scanner scanner);
 
 }

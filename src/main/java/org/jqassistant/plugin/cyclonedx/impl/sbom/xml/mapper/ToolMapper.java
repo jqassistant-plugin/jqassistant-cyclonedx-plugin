@@ -17,6 +17,6 @@ public interface ToolMapper extends DescriptorMapper<ToolType, ToolDescriptor> {
     @Mapping(target = "externalReferences", source = "externalReferences.reference")
     @Mapping(target = "hashes", source = "hashes.hash")
     @BeanMapping(ignoreUnmappedSourceProperties = { "any", "otherAttributes" })
-    ToolDescriptor toDescriptor(ToolType type, @Context Scanner scanner);
+    ToolDescriptor toDescriptor(ToolType value, @Context Scanner scanner);
 
 }

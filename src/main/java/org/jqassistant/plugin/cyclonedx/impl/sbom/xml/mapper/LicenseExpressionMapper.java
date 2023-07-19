@@ -17,6 +17,6 @@ public interface LicenseExpressionMapper extends DescriptorMapper<LicenseChoiceT
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "name", ignore = true)
     @Mapping(target = "url", ignore = true)
-    LicenseDescriptor toDescriptor(LicenseChoiceType.Expression type, @Context Scanner scanner);
+    LicenseDescriptor toDescriptor(LicenseChoiceType.Expression value, @Context Scanner scanner);
 
 }

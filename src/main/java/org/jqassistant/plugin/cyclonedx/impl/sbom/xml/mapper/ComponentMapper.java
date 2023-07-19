@@ -26,7 +26,7 @@ public interface ComponentMapper extends DescriptorMapper<Component, ComponentDe
     @Mapping(target = "hashes", source = "hashes.hash")
     @BeanMapping(ignoreUnmappedSourceProperties = { "supplier", "swid", "pedigree", "properties", "evidence", "releaseNotes", "modelCard", "data", "any",
         "otherAttributes" })
-    ComponentDescriptor toDescriptor(Component type, @Context Scanner scanner);
+    ComponentDescriptor toDescriptor(Component value, @Context Scanner scanner);
 
     default List<ComponentDescriptor> map(List<Object> componentAndAny, @Context Scanner scanner) {
         return componentAndAny == null ?

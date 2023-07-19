@@ -14,5 +14,6 @@ public interface HashMapper extends DescriptorMapper<Hash, HashDescriptor> {
 
     @Override
     @Mapping(target = "value", source = "content")
-    HashDescriptor toDescriptor(Hash type, @Context Scanner scanner);
+    HashDescriptor toDescriptor(Hash value, @Context Scanner scanner);
+
 }

@@ -16,6 +16,6 @@ public interface LicenseMapper extends DescriptorMapper<LicenseType, LicenseDesc
     @Override
     @Mapping(target = "expression", ignore = true)
     @BeanMapping(ignoreUnmappedSourceProperties = { "text", "licensing", "properties", "any" })
-    LicenseDescriptor toDescriptor(LicenseType type, @Context Scanner scanner);
+    LicenseDescriptor toDescriptor(LicenseType value, @Context Scanner scanner);
 
 }

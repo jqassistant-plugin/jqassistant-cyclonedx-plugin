@@ -8,23 +8,23 @@ import org.mapstruct.Context;
 /**
  * Base interface for mapping objects to XO {@link Descriptor}s.
  *
- * @param <T>
- *     The object type.
+ * @param <V>
+ *     The value type.
  * @param <D>
  *     The {@link Descriptor} type.
  */
 
-public interface DescriptorMapper<T, D extends Descriptor> extends DescriptorResolver<T, D> {
+public interface DescriptorMapper<V, D extends Descriptor> extends DescriptorResolver<V, D> {
 
     /**
      * Map a object to a {@link Descriptor}. This method resolves the Descriptor using {@link #resolve(Object, Class, Scanner)}.
      *
-     * @param type
+     * @param value
      *     The object.
      * @param scanner
      *     The {@link Scanner}.
      * @return The mapped {@link Descriptor}.
      */
-    D toDescriptor(T type, @Context Scanner scanner);
+    D toDescriptor(V value, @Context Scanner scanner);
 
 }

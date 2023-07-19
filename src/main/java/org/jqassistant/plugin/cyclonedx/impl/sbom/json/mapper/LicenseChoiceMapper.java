@@ -22,7 +22,7 @@ public interface LicenseChoiceMapper {
         return (value instanceof List) ? mapLicenses((List<?>) value, scanner) : emptyList();
     }
 
-    static List<LicenseDescriptor> mapLicenses(List<?> licences, Scanner scanner) {
+    default List<LicenseDescriptor> mapLicenses(List<?> licences, @Context Scanner scanner) {
         return licences.stream()
             .filter(value -> value instanceof Map)
             .map(license -> mapLicenseChoice((Map<String, ?>) license, scanner))
