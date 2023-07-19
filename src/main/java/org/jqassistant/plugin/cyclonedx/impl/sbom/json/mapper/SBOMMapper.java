@@ -16,16 +16,15 @@ import org.mapstruct.*;
 
 import static org.mapstruct.factory.Mappers.getMapper;
 
-@Mapper(uses = { ComponentMapper.class })
+@Mapper(uses = { ComponentMapper.class, ExternalReferenceMapper.class })
 public interface SBOMMapper extends DescriptorEnricher<Bom15Schema, SBOMDescriptor> {
 
     SBOMMapper INSTANCE = getMapper(SBOMMapper.class);
 
     @Override
     @Mapping(target = "metadata", ignore = true)
-    @Mapping(target = "externalReferences", ignore = true)
     @BeanMapping(ignoreUnmappedSourceProperties = { "metadata", "services", "dependencies", "compositions", "properties", "vulnerabilities", "annotations",
-        "formulation", "$schema", "bomFormat", "specVersion", "signature", "externalReferences" })
+        "formulation", "$schema", "bomFormat", "specVersion", "signature" })
     SBOMDescriptor toDescriptor(Bom15Schema bom, @MappingTarget SBOMDescriptor sbomDescriptor, @Context Scanner scanner);
 
     @AfterMapping

@@ -10,14 +10,13 @@ import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(uses = { HashMapper.class, ExternalReferenceMapper.class })
+@Mapper(uses = { HashMapper.class, LicenseChoiceMapper.class, ExternalReferenceMapper.class })
 public interface ComponentMapper extends DescriptorMapper<Component, ComponentDescriptor> {
 
     @Override
     @Mapping(target = "dependencies", ignore = true)
-    @Mapping(target = "licenses", ignore = true)
-    @BeanMapping(ignoreUnmappedSourceProperties = { "signature", "supplier", "swid", "pedigree", "properties", "evidence", "releaseNotes", "modelCard", "data",
-        "licenses" })
+    @BeanMapping(ignoreUnmappedSourceProperties = { "signature", "supplier", "swid", "pedigree", "properties", "evidence", "releaseNotes", "modelCard",
+        "data" })
     ComponentDescriptor toDescriptor(Component type, @Context Scanner scanner);
 
 }
