@@ -9,7 +9,8 @@
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.HashDescriptor</class>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.LicenseDescriptor</class>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.MetadataDescriptor</class>
-        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.OrganizatonalContactDescriptor</class>
+        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.OrganizationalContactDescriptor</class>
+        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.OrganizationalEntityDescriptor</class>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.PropertyDescriptor</class>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.SBOMJsonFileDescriptor</class>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.SBOMXmlFileDescriptor</class>

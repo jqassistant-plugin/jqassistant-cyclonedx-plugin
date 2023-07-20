@@ -9,7 +9,7 @@ import com.buschmais.xo.neo4j.api.annotation.Relation;
 import org.jqassistant.plugin.cyclonedx.api.model.CycloneDXDescriptor;
 
 @Label("Metadata")
-public interface MetadataDescriptor extends CycloneDXDescriptor, LicensesTemplate, PropertiesTemplate {
+public interface MetadataDescriptor extends CycloneDXDescriptor, LicensesTemplate, PropertiesTemplate, SupplierTemplate {
 
     ZonedDateTime getTimestamp();
 
@@ -24,6 +24,12 @@ public interface MetadataDescriptor extends CycloneDXDescriptor, LicensesTemplat
     void setComponent(ComponentDescriptor component);
 
     @Relation("HAS_AUTHOR")
-    List<OrganizatonalContactDescriptor> getAuthors();
+    List<OrganizationalContactDescriptor> getAuthors();
+
+    @Relation("HAS_MANUFACTURE")
+    OrganizationalEntityDescriptor getManufacture();
+
+    void setManufacture(OrganizationalEntityDescriptor manufacture);
+
 }
 

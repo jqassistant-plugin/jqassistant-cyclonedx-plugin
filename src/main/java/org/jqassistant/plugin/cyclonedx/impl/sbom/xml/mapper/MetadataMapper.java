@@ -10,13 +10,14 @@ import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(uses = { ComponentMapper.class, LicenseChoiceMapper.class, ToolMapper.class, OrganizationalContactMapper.class, PropertyMapper.class })
+@Mapper(uses = { ComponentMapper.class, LicenseChoiceMapper.class, ToolMapper.class, OrganizationalContactMapper.class, OrganizationalEntityMapper.class,
+    PropertyMapper.class })
 public interface MetadataMapper extends DescriptorMapper<Metadata, MetadataDescriptor> {
 
     @Override
     @Mapping(target = "authors", source = "authors.author")
     @Mapping(target = "tools", source = "tools.tool")
-    @BeanMapping(ignoreUnmappedSourceProperties = { "lifecycles", "manufacture", "supplier", "any", "otherAttributes" })
+    @BeanMapping(ignoreUnmappedSourceProperties = { "lifecycles", "any", "otherAttributes" })
     MetadataDescriptor toDescriptor(Metadata value, @Context Scanner scanner);
 
 }

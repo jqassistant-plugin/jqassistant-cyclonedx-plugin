@@ -8,5 +8,4 @@ public interface StringMapper {
     default String map(Object value) {
         return value == null ? null : value.toString();
     }
-
 }
