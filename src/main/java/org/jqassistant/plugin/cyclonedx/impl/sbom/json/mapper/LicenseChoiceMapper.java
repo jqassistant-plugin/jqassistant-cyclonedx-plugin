@@ -33,9 +33,9 @@ public interface LicenseChoiceMapper {
     static LicenseDescriptor mapLicenseChoice(Map<String, Object> licenseChoice, Scanner scanner) {
         Map<String, Object> licenseObject = (Map<String, Object>) licenseChoice.get("license");
         if (licenseObject != null) {
-            return JsonLicenseMapper.INSTANCE.toDescriptor(licenseObject, scanner);
+            return MapToLicenseMapper.INSTANCE.toDescriptor(licenseObject, scanner);
         } else if (licenseChoice.containsKey("expression")) {
-            return JsonLicenseMapper.INSTANCE.toDescriptor(licenseChoice, scanner);
+            return MapToLicenseMapper.INSTANCE.toDescriptor(licenseChoice, scanner);
         }
         return null;
     }

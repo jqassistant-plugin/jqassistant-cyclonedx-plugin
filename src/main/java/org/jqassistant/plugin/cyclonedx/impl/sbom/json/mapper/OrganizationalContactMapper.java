@@ -6,5 +6,5 @@ import org.jqassistant.plugin.cyclonedx.impl.mapper.DescriptorMapper;
 import org.mapstruct.Mapper;
 
 @Mapper
-public interface OrganizationContactMapper extends DescriptorMapper<OrganizationalContact, OrganizatonalContactDescriptor> {
+public interface OrganizationalContactMapper extends DescriptorMapper<OrganizationalContact, OrganizatonalContactDescriptor> {
 }

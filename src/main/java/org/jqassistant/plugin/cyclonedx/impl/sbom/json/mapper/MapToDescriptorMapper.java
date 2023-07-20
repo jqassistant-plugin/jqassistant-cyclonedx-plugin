@@ -1,4 +1,4 @@
-package org.jqassistant.plugin.cyclonedx.impl.mapper.json;
+package org.jqassistant.plugin.cyclonedx.impl.sbom.json.mapper;
 
 import java.util.List;
 import java.util.Map;
@@ -10,7 +10,7 @@ import com.buschmais.jqassistant.core.store.api.model.Descriptor;
 import org.jqassistant.plugin.cyclonedx.impl.mapper.DescriptorMapper;
 import org.mapstruct.Context;
 
-public interface JsonDescriptorMapper<D extends Descriptor> extends DescriptorMapper<Map<String, Object>, D> {
+public interface MapToDescriptorMapper<D extends Descriptor> extends DescriptorMapper<Map<String, Object>, D> {
 
     default List<D> toList(Object value, @Context Scanner scanner) {
         if (value == null) {
