@@ -9,14 +9,11 @@ import com.buschmais.xo.neo4j.api.annotation.Relation;
 import org.jqassistant.plugin.cyclonedx.api.model.CycloneDXDescriptor;
 
 @Label("Metadata")
-public interface MetadataDescriptor extends CycloneDXDescriptor, LicensesTemplate, PropertiesTemplate, SupplierTemplate {
+public interface MetadataDescriptor extends CycloneDXDescriptor, LicensesTemplate, PropertiesTemplate, SupplierTemplate, ToolsTemplate {
 
     ZonedDateTime getTimestamp();
 
     void setTimestamp(ZonedDateTime timestamp);
-
-    @Relation("BY_TOOL")
-    List<ToolDescriptor> getTools();
 
     @Relation("HAS_COMPONENT")
     ComponentDescriptor getComponent();

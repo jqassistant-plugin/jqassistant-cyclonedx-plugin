@@ -1,5 +1,7 @@
 package org.jqassistant.plugin.cyclonedx.api.model.sbom;
 
+import java.util.List;
+
 import com.buschmais.xo.neo4j.api.annotation.Label;
 import com.buschmais.xo.neo4j.api.annotation.Relation;
 
@@ -20,4 +22,7 @@ public interface SBOMDescriptor extends CycloneDXDescriptor, ComponentsTemplate,
     MetadataDescriptor getMetadata();
 
     void setMetadata(MetadataDescriptor metadata);
+
+    @Relation("HAS_VULNERABILITY")
+    List<VulnerabilityDescriptor> getVulnerabilities();
 }

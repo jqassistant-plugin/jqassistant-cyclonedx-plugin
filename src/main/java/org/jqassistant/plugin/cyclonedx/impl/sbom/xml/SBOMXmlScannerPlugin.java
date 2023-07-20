@@ -62,6 +62,7 @@ public class SBOMXmlScannerPlugin extends AbstractXmlFileScannerPlugin<SBOMXmlFi
                 OrganizationalContactDescriptor.class))
             .resolver(bomRefResolverFactory.resolver(OrganizationalEntity.class, organizationalEntity -> organizationalEntity.getBomRef(),
                 OrganizationalEntityDescriptor.class))
+            .resolver(bomRefResolverFactory.resolver(VulnerabilityType.class, vulnerability -> vulnerability.getBomRef(), VulnerabilityDescriptor.class))
             .build();
         ScannerContext scannerContext = scanner.getContext();
         scannerContext.push(ResolverFactory.class, resolverFactory);

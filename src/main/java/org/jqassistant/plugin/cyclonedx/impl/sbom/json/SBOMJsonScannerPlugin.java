@@ -53,6 +53,7 @@ public class SBOMJsonScannerPlugin extends AbstractScannerPlugin<FileResource, S
                 OrganizationalContactDescriptor.class))
             .resolver(bomRefResolverFactory.resolver(OrganizationalEntity.class, organizationalEntity -> organizationalEntity.getBomRef(),
                 OrganizationalEntityDescriptor.class))
+            .resolver(bomRefResolverFactory.resolver(Vulnerability.class, vulnerability -> vulnerability.getBomRef(), VulnerabilityDescriptor.class))
             .build();
         scannerContext.push(ResolverFactory.class, resolverFactory);
         try {
