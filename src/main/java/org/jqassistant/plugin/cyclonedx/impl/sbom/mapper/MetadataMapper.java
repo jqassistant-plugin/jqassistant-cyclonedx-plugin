@@ -1,20 +1,22 @@
-package org.jqassistant.plugin.cyclonedx.impl.sbom.json.mapper;
+package org.jqassistant.plugin.cyclonedx.impl.sbom.mapper;
 
 import com.buschmais.jqassistant.core.scanner.api.Scanner;
 
+import org.cyclonedx.model.Metadata;
 import org.jqassistant.plugin.cyclonedx.api.model.sbom.MetadataDescriptor;
-import org.jqassistant.plugin.cyclonedx.generated.bom.json.Metadata;
 import org.jqassistant.plugin.cyclonedx.impl.mapper.DescriptorMapper;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
-@Mapper(uses = { ComponentMapper.class, LicenseChoiceMapper.class, OrganizationalContactMapper.class, OrganizationalEntityMapper.class, MapToToolMapper.class,
-    PropertyMapper.class })
+@Mapper(uses = { ComponentMapper.class, LicenseChoiceMapper.class, OrganizationalContactMapper.class, OrganizationalEntityMapper.class, PropertyMapper.class,
+    ToolMapper.class })
 public interface MetadataMapper extends DescriptorMapper<Metadata, MetadataDescriptor> {
 
     @Override
-    @BeanMapping(ignoreUnmappedSourceProperties = { "lifecycles" })
+    @Mapping(target = "licenses", source = "licenseChoice")
+    @BeanMapping(ignoreUnmappedSourceProperties = { "extensions", "extensibleTypes" })
     MetadataDescriptor toDescriptor(Metadata value, @Context Scanner scanner);
 
 }

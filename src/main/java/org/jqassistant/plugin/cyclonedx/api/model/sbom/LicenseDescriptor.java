@@ -5,7 +5,7 @@ import com.buschmais.xo.neo4j.api.annotation.Label;
 import org.jqassistant.plugin.cyclonedx.api.model.CycloneDXDescriptor;
 
 @Label("License")
-public interface LicenseDescriptor extends CycloneDXDescriptor, BomRefTemplate, PropertiesTemplate {
+public interface LicenseDescriptor extends CycloneDXDescriptor {
 
     String getId();
 

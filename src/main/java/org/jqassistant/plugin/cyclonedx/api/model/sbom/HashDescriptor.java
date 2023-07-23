@@ -7,9 +7,9 @@ import org.jqassistant.plugin.cyclonedx.api.model.CycloneDXDescriptor;
 @Label("Hash")
 public interface HashDescriptor extends CycloneDXDescriptor {
 
-    String getAlg();
+    String getAlgorithm();
 
-    void setAlg(String alg);
+    void setAlgorithm(String algorithm);
 
     String getValue();
 

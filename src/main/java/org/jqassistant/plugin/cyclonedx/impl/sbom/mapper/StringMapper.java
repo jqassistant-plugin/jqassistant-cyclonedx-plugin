@@ -1,4 +1,4 @@
-package org.jqassistant.plugin.cyclonedx.impl.sbom.json.mapper;
+package org.jqassistant.plugin.cyclonedx.impl.sbom.mapper;
 
 import org.mapstruct.Mapper;
 

@@ -12,17 +12,15 @@
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.OrganizationalContactDescriptor</class>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.OrganizationalEntityDescriptor</class>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.PropertyDescriptor</class>
-        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.SBOMJsonFileDescriptor</class>
-        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.SBOMXmlFileDescriptor</class>
+        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.SBOMDescriptor</class>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.ToolDescriptor</class>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.VulnerabilityDescriptor</class>
-        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.VulnerabilitySourceDescriptor</class>
     </model>
     <scope>
         <class>org.jqassistant.plugin.cyclonedx.api.CycloneDXScope</class>
     </scope>
     <scanner>
-        <class>org.jqassistant.plugin.cyclonedx.impl.sbom.json.SBOMJsonScannerPlugin</class>
-        <class>org.jqassistant.plugin.cyclonedx.impl.sbom.xml.SBOMXmlScannerPlugin</class>
+        <class>org.jqassistant.plugin.cyclonedx.impl.sbom.JsonSBOMScannerPlugin</class>
+        <class>org.jqassistant.plugin.cyclonedx.impl.sbom.XmlSBOMScannerPlugin</class>
     </scanner>
 </jqassistant-plugin>

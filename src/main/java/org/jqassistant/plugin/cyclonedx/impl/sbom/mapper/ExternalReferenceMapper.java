@@ -1,7 +1,7 @@
-package org.jqassistant.plugin.cyclonedx.impl.sbom.json.mapper;
+package org.jqassistant.plugin.cyclonedx.impl.sbom.mapper;
 
+import org.cyclonedx.model.ExternalReference;
 import org.jqassistant.plugin.cyclonedx.api.model.sbom.ExternalReferenceDescriptor;
-import org.jqassistant.plugin.cyclonedx.generated.bom.json.ExternalReference;
 import org.jqassistant.plugin.cyclonedx.impl.mapper.DescriptorMapper;
 import org.mapstruct.Mapper;
 
