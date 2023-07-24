@@ -15,10 +15,10 @@ import org.mapstruct.MappingTarget;
  *     The {@link Descriptor} type.
  */
 
-public interface DescriptorEnricher<T, D extends Descriptor> extends DescriptorResolver<T, D> {
+public interface DescriptorEnricher<T, D extends Descriptor> {
 
     /**
-     * Map a object to a {@link Descriptor}. This method resolves the Descriptor using {@link #resolve(Object, Class, Scanner)}.
+     * Map a object to an existing {@link Descriptor}.
      *
      * @param type
      *     The object.

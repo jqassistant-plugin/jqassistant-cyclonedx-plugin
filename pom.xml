@@ -108,57 +108,6 @@
                     <detectJavaApiLink>false</detectJavaApiLink>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.jvnet.jaxb2.maven2</groupId>
-                <artifactId>maven-jaxb2-plugin</artifactId>
-                <version>0.15.3</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <schemaDirectory>src/main/resources/META-INF/xsd</schemaDirectory>
-                            <!-- Provide namespace in each generated class to avoid problems loading this information from package-info.java on Java 11 and newer -->
-                            <packageLevelAnnotations>false</packageLevelAnnotations>
-                            <args>
-                                <arg>-mark-generated</arg>
-                                <arg>-Xdefault-value</arg>
-                            </args>
-                            <plugins>
-                                <plugin>
-                                    <groupId>org.jvnet.jaxb2_commons</groupId>
-                                    <artifactId>jaxb2-default-value</artifactId>
-                                    <version>1.1</version>
-                                </plugin>
-                            </plugins>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <!--
-            <plugin>
-                <groupId>org.jsonschema2pojo</groupId>
-                <artifactId>jsonschema2pojo-maven-plugin</artifactId>
-                <version>1.2.1</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <annotationStyle>jackson2</annotationStyle>
-                            <includeAdditionalProperties>false</includeAdditionalProperties>
-                            <sourcePaths>
-                                <sourcePath>${project.basedir}/src/main/resources/META-INF/jsd/bom-1.5.schema.json</sourcePath>
-                            </sourcePaths>
-                            <targetPackage>org.jqassistant.plugin.cyclonedx.generated.bom.json</targetPackage>
-                            <includeGeneratedAnnotation>false</includeGeneratedAnnotation>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            -->
         </plugins>
     </build>
 
