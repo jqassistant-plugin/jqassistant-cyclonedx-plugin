@@ -11,13 +11,13 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(uses = { AttachmentTextMapper.class })
 public interface LicenseMapper extends DescriptorMapper<License, LicenseDescriptor> {
 
     LicenseMapper INSTANCE = Mappers.getMapper(LicenseMapper.class);
 
     @Override
     @Mapping(target = "expression", ignore = true)
-    @BeanMapping(ignoreUnmappedSourceProperties = { "extensibleTypes", "extensions", "attachmentText" })
+    @BeanMapping(ignoreUnmappedSourceProperties = { "extensibleTypes", "extensions" })
     LicenseDescriptor toDescriptor(License value, @Context Scanner scanner);
 }

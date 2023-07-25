@@ -23,4 +23,11 @@ public interface ComponentMapper extends BomRefDescriptorMapper<Component, Compo
     @BeanMapping(ignoreUnmappedSourceProperties = { "signature", "swid", "pedigree", "evidence", "releaseNotes", "extensions", "extensibleTypes" })
     ComponentDescriptor toDescriptor(Component value, @Context Scanner scanner);
 
+    default ComponentDescriptor map(String ref, @Context Scanner scanner) {
+        return scanner.getContext()
+            .peek(BomRefResolver.class)
+            .resolve(ref, ComponentDescriptor.class, scanner.getContext());
+
+    }
+
 }

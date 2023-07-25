@@ -20,6 +20,7 @@ public interface LicenseExpressionMapper extends DescriptorMapper<String, Licens
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "name", ignore = true)
     @Mapping(target = "url", ignore = true)
+    @Mapping(target = "attachmentText", ignore = true)
     @BeanMapping(ignoreUnmappedSourceProperties = { "empty", "bytes", "blank" })
     LicenseDescriptor toDescriptor(String value, @Context Scanner scanner);
 }

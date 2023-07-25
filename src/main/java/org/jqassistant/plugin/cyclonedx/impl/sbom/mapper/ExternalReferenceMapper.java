@@ -5,7 +5,7 @@ import org.jqassistant.plugin.cyclonedx.api.model.sbom.ExternalReferenceDescript
 import org.jqassistant.plugin.cyclonedx.impl.mapper.DescriptorMapper;
 import org.mapstruct.Mapper;
 
-@Mapper(uses = { HashMapper.class, StringMapper.class })
+@Mapper(uses = { HashMapper.class })
 public interface ExternalReferenceMapper extends DescriptorMapper<ExternalReference, ExternalReferenceDescriptor> {
 }
 

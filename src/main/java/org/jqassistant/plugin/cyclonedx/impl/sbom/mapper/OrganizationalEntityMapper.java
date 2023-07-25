@@ -9,7 +9,7 @@ import org.mapstruct.BeanMapping;
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 
-@Mapper(uses = { OrganizationalContactMapper.class, StringMapper.class })
+@Mapper(uses = { OrganizationalContactMapper.class })
 public interface OrganizationalEntityMapper extends DescriptorMapper<OrganizationalEntity, OrganizationalEntityDescriptor> {
 
     @Override
