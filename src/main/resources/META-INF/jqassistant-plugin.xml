@@ -16,14 +16,13 @@
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.SBOMDescriptor</class>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.ToolDescriptor</class>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.VulnerabilityAdvisoryDescriptor</class>
-        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.VulnerabilityAffectDescriptor</class>
+        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.VulnerabilityAffectsDescriptor</class>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.VulnerabilityAnalysisDescriptor</class>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.VulnerabilityCreditsDescriptor</class>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.VulnerabilityDescriptor</class>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.VulnerabilityRatingDescriptor</class>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.VulnerabilityReferenceDescriptor</class>
         <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.VulnerabilitySourceDescriptor</class>
-        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.VulnerabilityVersionDescriptor</class>
     </model>
     <scope>
         <class>org.jqassistant.plugin.cyclonedx.api.CycloneDXScope</class>

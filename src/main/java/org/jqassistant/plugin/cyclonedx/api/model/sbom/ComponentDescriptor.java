@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.buschmais.xo.neo4j.api.annotation.Label;
 import com.buschmais.xo.neo4j.api.annotation.Relation;
+import com.buschmais.xo.neo4j.api.annotation.Relation.Incoming;
 
 import org.jqassistant.plugin.cyclonedx.api.model.CycloneDXDescriptor;
 
@@ -66,4 +67,8 @@ public interface ComponentDescriptor
 
     @Relation("DEPENDS_ON")
     List<ComponentDescriptor> getDependencies();
+
+    @Relation
+    @Incoming
+    List<VulnerabilityAffectsDescriptor> getAffectedByVulnerabilities();
 }

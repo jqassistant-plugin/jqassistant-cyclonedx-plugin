@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.cyclonedx.exception.ParseException;
 import org.cyclonedx.model.Bom;
 import org.cyclonedx.parsers.Parser;
+import org.jqassistant.plugin.cyclonedx.api.CycloneDXScope;
 import org.jqassistant.plugin.cyclonedx.api.model.sbom.SBOMDescriptor;
 import org.jqassistant.plugin.cyclonedx.impl.sbom.mapper.BomRefResolver;
 import org.jqassistant.plugin.cyclonedx.impl.sbom.mapper.SBOMMapper;
@@ -36,6 +37,13 @@ abstract class AbstractSBOMScannerPlugin extends AbstractScannerPlugin<FileResou
     public final Class<SBOMDescriptor> getDescriptorType() {
         return SBOMDescriptor.class;
     }
+
+    @Override
+    public final boolean accepts(FileResource fileResource, String path, Scope scope) throws IOException {
+        return CycloneDXScope.SBOM.equals(scope) && accepts(fileResource, path);
+    }
+
+    protected abstract boolean accepts(FileResource fileResource, String path) throws IOException;
 
     @Override
     public SBOMDescriptor scan(FileResource fileResource, String path, Scope scope, Scanner scanner) throws IOException {

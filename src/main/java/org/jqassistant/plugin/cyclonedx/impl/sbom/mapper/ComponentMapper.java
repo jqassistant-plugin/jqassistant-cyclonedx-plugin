@@ -20,6 +20,7 @@ public interface ComponentMapper extends BomRefDescriptorMapper<Component, Compo
     @Override
     @Mapping(target = "dependencies", ignore = true)
     @Mapping(target = "licenses", source = "licenseChoice")
+    @Mapping(target = "affectedByVulnerabilities", ignore = true)
     @BeanMapping(ignoreUnmappedSourceProperties = { "signature", "swid", "pedigree", "evidence", "releaseNotes", "extensions", "extensibleTypes" })
     ComponentDescriptor toDescriptor(Component value, @Context Scanner scanner);
 
