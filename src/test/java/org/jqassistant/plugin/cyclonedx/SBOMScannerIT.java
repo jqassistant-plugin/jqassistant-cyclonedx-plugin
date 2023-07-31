@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SBOMScannerIT extends AbstractPluginIT {
+class SBOMScannerIT extends AbstractPluginIT {
 
     @Test
     void xmlSBOM() {
