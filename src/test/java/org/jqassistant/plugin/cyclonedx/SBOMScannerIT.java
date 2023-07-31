@@ -35,12 +35,16 @@ class SBOMScannerIT extends AbstractPluginIT {
         verifyVulnerabilities("/vulnerabilities-bom.json");
     }
 
-    private void verifyComponents(String resource) {
+    private SBOMDescriptor scanSBOM(String resource) {
         File file = ClasspathResource.getFile(SBOMScannerIT.class, resource);
         Descriptor descriptor = getScanner().scan(file, file.getAbsolutePath(), CycloneDXScope.SBOM);
-        store.beginTransaction();
         assertThat(descriptor).isInstanceOf(SBOMDescriptor.class);
-        SBOMDescriptor sbomDescriptor = (SBOMDescriptor) descriptor;
+        return (SBOMDescriptor) descriptor;
+    }
+
+    private void verifyComponents(String resource) {
+        SBOMDescriptor sbomDescriptor = scanSBOM(resource);
+        store.beginTransaction();
         verifySBOM(sbomDescriptor);
         verifyMetadata(sbomDescriptor.getMetadata());
         verifyComponents(sbomDescriptor.getComponents());
@@ -66,7 +70,16 @@ class SBOMScannerIT extends AbstractPluginIT {
             assertThat(componentDescriptor.getPurl()).isNotEmpty();
             assertThat(componentDescriptor.getDescription()).isNotEmpty();
             assertThat(componentDescriptor.getScope()).isEqualTo("required");
+            verifyHashes(componentDescriptor.getHashes());
             verifyExternalReferences(componentDescriptor.getExternalReferences());
+        });
+    }
+
+    private static void verifyHashes(List<HashDescriptor> hashDescriptors) {
+        assertThat(hashDescriptors).isNotEmpty();
+        hashDescriptors.forEach(hashDescriptor -> {
+            assertThat(hashDescriptor.getAlgorithm()).isNotEmpty();
+            assertThat(hashDescriptor.getValue()).isNotEmpty();
         });
     }
 
@@ -126,20 +139,75 @@ class SBOMScannerIT extends AbstractPluginIT {
         assertThat(toolDescriptor.getVendor()).isEqualTo(expectedVendor);
         assertThat(toolDescriptor.getName()).isEqualTo(expectedName);
         assertThat(toolDescriptor.getVersion()).isEqualTo(expectedVersion);
-        List<HashDescriptor> hashDescriptors = toolDescriptor.getHashes();
-        assertThat(hashDescriptors).isNotEmpty();
-        hashDescriptors.forEach(hashDescriptor -> {
-            assertThat(hashDescriptor.getAlgorithm()).isNotEmpty();
-            assertThat(hashDescriptor.getValue()).isNotEmpty();
-        });
+        verifyHashes(toolDescriptor.getHashes());
     }
 
     private void verifyVulnerabilities(String resource) {
-        File file = ClasspathResource.getFile(SBOMScannerIT.class, resource);
-        Descriptor descriptor = getScanner().scan(file, file.getAbsolutePath(), CycloneDXScope.SBOM);
+        SBOMDescriptor sbomDescriptor = scanSBOM(resource);
         store.beginTransaction();
-        assertThat(descriptor).isInstanceOf(SBOMDescriptor.class);
-        SBOMDescriptor sbomDescriptor = (SBOMDescriptor) descriptor;
+        List<VulnerabilityDescriptor> vulnerabilities = sbomDescriptor.getVulnerabilities();
+        verifyVulnerabilities(vulnerabilities);
         store.commitTransaction();
+    }
+
+    private static void verifyVulnerabilities(List<VulnerabilityDescriptor> vulnerabilities) {
+        assertThat(vulnerabilities).isNotEmpty();
+        vulnerabilities.forEach(vulnerabilityDescriptor -> {
+            assertThat(vulnerabilityDescriptor.getId()).startsWith("CVE-");
+            assertThat(vulnerabilityDescriptor.getDescription()).isNotEmpty();
+            assertThat(vulnerabilityDescriptor.getRecommendation()).isNotEmpty();
+            assertThat(vulnerabilityDescriptor.getCreated()).isNotNull();
+            assertThat(vulnerabilityDescriptor.getPublished()).isNotNull();
+            assertThat(vulnerabilityDescriptor.getUpdated()).isNotNull();
+            assertThat(vulnerabilityDescriptor.getCwes()).isNotEmpty();
+            verifyAffects(vulnerabilityDescriptor.getAffects());
+            verifyAdvisories(vulnerabilityDescriptor.getAdvisories());
+            verifyAnalysis(vulnerabilityDescriptor.getAnalysis());
+            verifyRatings(vulnerabilityDescriptor.getRatings());
+            verifyVulnerabilitySource(vulnerabilityDescriptor.getSource());
+        });
+    }
+
+    private static void verifyAffects(List<VulnerabilityAffectsDescriptor> affectsDescriptors) {
+        assertThat(affectsDescriptors).isNotEmpty();
+        affectsDescriptors.forEach(affectsDescriptor -> {
+            ComponentDescriptor component = affectsDescriptor.getComponent();
+            assertThat(component).isNotNull();
+            assertThat(component.getBomRef()).isNotEmpty();
+        });
+    }
+
+    private static void verifyAdvisories(List<VulnerabilityAdvisoryDescriptor> advisories) {
+        assertThat(advisories).isNotEmpty();
+        advisories.forEach(advisoryDescriptor -> {
+            assertThat(advisoryDescriptor.getTitle()).isNotEmpty();
+            assertThat(advisoryDescriptor.getUrl()).startsWith("https://");
+        });
+    }
+
+    private static void verifyAnalysis(VulnerabilityAnalysisDescriptor analysisDescriptor) {
+        assertThat(analysisDescriptor.getState()).isIn("resolved", "resolved_with_pedigree", "exploitable", "in_triage", "false_positive", "not_affected");
+        assertThat(analysisDescriptor.getJustification()).isIn("code_not_present", "code_not_reachable", "requires_configuration", "requires_dependency",
+            "requires_environment", "protected_by_compiler", "protected_at_runtime", "protected_at_perimeter", "protected_by_mitigating_control");
+        assertThat(analysisDescriptor.getResponses()).isNotEmpty()
+            .containsAnyOf("can_not_fix", "will_not_fix", "update", "rollback", "workaround_available");
+        assertThat(analysisDescriptor.getDetail()).isNotEmpty();
+    }
+
+    private static void verifyRatings(List<VulnerabilityRatingDescriptor> ratings) {
+        assertThat(ratings).isNotEmpty();
+        ratings.forEach(ratingDescriptor -> {
+            verifyVulnerabilitySource(ratingDescriptor.getSource());
+            assertThat(ratingDescriptor.getScore()).isPositive();
+            assertThat(ratingDescriptor.getSeverity()).isIn("unknown", "none", "info", "low", "medium", "high", "critical");
+            assertThat(ratingDescriptor.getMethod()).isIn("CVSSv2", "CVSSv3", "CVSSv31", "OWASP", "other");
+            assertThat(ratingDescriptor.getVector()).isNotEmpty();
+        });
+    }
+
+    private static void verifyVulnerabilitySource(VulnerabilitySourceDescriptor sourceDescriptor) {
+        assertThat(sourceDescriptor).isNotNull();
+        assertThat(sourceDescriptor.getName()).isEqualTo("NVD");
+        assertThat(sourceDescriptor.getUrl()).startsWith("https://nvd.nist.gov/");
     }
 }
