@@ -6,19 +6,11 @@ import com.buschmais.xo.neo4j.api.annotation.Relation;
 import org.jqassistant.plugin.cyclonedx.api.model.CycloneDXDescriptor;
 
 @Label("License")
-public interface LicenseDescriptor extends CycloneDXDescriptor {
+public interface LicenseDescriptor extends CycloneDXDescriptor, NameTemplate, UrlTemplate {
 
     String getId();
 
     void setId(String id);
-
-    String getName();
-
-    void setName(String name);
-
-    String getUrl();
-
-    void setUrl(String name);
 
     String getExpression();
 

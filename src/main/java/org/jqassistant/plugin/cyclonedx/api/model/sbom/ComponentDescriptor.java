@@ -11,11 +11,7 @@ import org.jqassistant.plugin.cyclonedx.api.model.CycloneDXDescriptor;
 @Label("Component")
 public interface ComponentDescriptor
     extends CycloneDXDescriptor, BomRefTemplate, HashesTemplate, LicensesTemplate, ExternalReferencesTemplate, ComponentsTemplate, PropertiesTemplate,
-    SupplierTemplate {
-
-    String getType();
-
-    void setType(String key);
+    SupplierTemplate, VersionTemplate, NameTemplate, TypeTemplate {
 
     String getPublisher();
 
@@ -40,14 +36,6 @@ public interface ComponentDescriptor
     String getGroup();
 
     void setGroup(String group);
-
-    String getName();
-
-    void setName(String name);
-
-    String getVersion();
-
-    void setVersion(String version);
 
     String getDescription();
 

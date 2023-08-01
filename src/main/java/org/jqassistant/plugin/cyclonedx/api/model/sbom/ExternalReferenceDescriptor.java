@@ -8,19 +8,11 @@ import com.buschmais.xo.neo4j.api.annotation.Relation;
 import org.jqassistant.plugin.cyclonedx.api.model.CycloneDXDescriptor;
 
 @Label("ExternalReference")
-public interface ExternalReferenceDescriptor extends CycloneDXDescriptor {
+public interface ExternalReferenceDescriptor extends CycloneDXDescriptor, UrlTemplate, TypeTemplate {
 
     String getComment();
 
     void setComment(String comment);
-
-    String getType();
-
-    void setType(String type);
-
-    String getUrl();
-
-    void setUrl(String url);
 
     @Relation("HAS_HASH")
     List<HashDescriptor> getHashes();

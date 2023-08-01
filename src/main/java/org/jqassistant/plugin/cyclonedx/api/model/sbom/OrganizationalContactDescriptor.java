@@ -5,11 +5,7 @@ import com.buschmais.xo.neo4j.api.annotation.Label;
 import org.jqassistant.plugin.cyclonedx.api.model.CycloneDXDescriptor;
 
 @Label
-public interface OrganizationalContactDescriptor extends CycloneDXDescriptor {
-
-    String getName();
-
-    void setName(String name);
+public interface OrganizationalContactDescriptor extends CycloneDXDescriptor, NameTemplate {
 
     String getEmail();
 
