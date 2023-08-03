@@ -25,3 +25,9 @@ jqassistant:
         - cyclonedx:sbom::<path_to_>/sbom.json
 ----
 
+== Model
+
+The SBOM scanner creates a graph based on the following model:
+
+.CycloneDX SBOM scanner model
+image:model.drawio.svg[]
