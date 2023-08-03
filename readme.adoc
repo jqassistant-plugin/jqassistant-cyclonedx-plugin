@@ -7,7 +7,7 @@ component information, dependencies and vulnerabilities.
 
 == Usage
 
-Declare the plugin to the plugins section of the `.jqassistant.yml` configuration file of your project:
+Declare the plugin in the plugins section of the `.jqassistant.yml` configuration file of your project:
 
 [source,yaml]
 ..jqassistant.yml
@@ -29,5 +29,9 @@ jqassistant:
 
 The SBOM scanner creates a graph based on the following model:
 
-.CycloneDX SBOM scanner model
-image:model.drawio.svg[]
+image::model.drawio.png[]
+
+== Limitations
+
+* The scanner currently supports a subset of the items defined in CycloneDX SBOM schema version 1.4.
+Feel free to raise an issue or provide a PR if any important information is missing.
