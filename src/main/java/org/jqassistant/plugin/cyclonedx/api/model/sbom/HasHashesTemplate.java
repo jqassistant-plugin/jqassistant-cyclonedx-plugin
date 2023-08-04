@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.buschmais.xo.neo4j.api.annotation.Relation;
 
-public interface ComponentsTemplate {
+public interface HasHashesTemplate {
 
-    @Relation("HAS_COMPONENT")
-    List<ComponentDescriptor> getComponents();
+    @Relation("HAS_HASH")
+    List<HashDescriptor> getHashes();
 
 }

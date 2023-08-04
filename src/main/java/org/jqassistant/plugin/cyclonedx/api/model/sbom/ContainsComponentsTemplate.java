@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.buschmais.xo.neo4j.api.annotation.Relation;
 
-public interface LicensesTemplate {
+public interface ContainsComponentsTemplate {
 
-    @Relation("DECLARES_LICENSE")
-    List<LicenseDescriptor> getLicenses();
+    @Relation("CONTAINS_COMPONENT")
+    List<ComponentDescriptor> getComponents();
 
 }

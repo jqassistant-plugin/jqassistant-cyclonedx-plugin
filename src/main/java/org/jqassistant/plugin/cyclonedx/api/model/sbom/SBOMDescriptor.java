@@ -8,7 +8,7 @@ import com.buschmais.xo.neo4j.api.annotation.Relation;
 import org.jqassistant.plugin.cyclonedx.api.model.CycloneDXDescriptor;
 
 @Label("SBOM")
-public interface SBOMDescriptor extends CycloneDXDescriptor, ComponentsTemplate, ExternalReferencesTemplate, PropertiesTemplate, VersionTemplate {
+public interface SBOMDescriptor extends CycloneDXDescriptor, ContainsComponentsTemplate, HasExternalReferencesTemplate, HasPropertiesTemplate, VersionTemplate {
 
     String getSerialNumber();
 
