@@ -35,3 +35,9 @@ image::model.drawio.png[]
 
 * The scanner currently supports a subset of the items defined in CycloneDX SBOM schema version 1.4.
 Feel free to raise an issue or provide a PR if any important information is missing.
+
+== Changelog
+
+=== 1.0.0
+
+- Initial Release
