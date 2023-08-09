@@ -17,7 +17,7 @@ jqassistant:
     # Declares the jQAssistant CycloneDX plugin
     - group-id: org.jqassistant.plugin
       artifact-id: jqassistant-cyclonedx-plugin
-      version: 1.0.0-SNAPSHOT
+      version: 1.0.0
   scan:
     include:
       files:
