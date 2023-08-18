@@ -2,9 +2,9 @@ package org.jqassistant.plugin.cyclonedx.impl.sbom.mapper;
 
 import com.buschmais.jqassistant.core.scanner.api.Scanner;
 import com.buschmais.jqassistant.core.store.api.model.Descriptor;
+import com.buschmais.jqassistant.plugin.common.api.mapper.DescriptorMapper;
 
 import org.jqassistant.plugin.cyclonedx.api.model.sbom.BomRefTemplate;
-import org.jqassistant.plugin.cyclonedx.impl.mapper.DescriptorMapper;
 import org.mapstruct.Context;
 import org.mapstruct.ObjectFactory;
 import org.mapstruct.TargetType;

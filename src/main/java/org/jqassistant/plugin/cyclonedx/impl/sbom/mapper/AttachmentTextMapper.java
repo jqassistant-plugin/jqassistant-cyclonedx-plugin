@@ -1,8 +1,9 @@
 package org.jqassistant.plugin.cyclonedx.impl.sbom.mapper;
 
+import com.buschmais.jqassistant.plugin.common.api.mapper.DescriptorMapper;
+
 import org.cyclonedx.model.AttachmentText;
 import org.jqassistant.plugin.cyclonedx.api.model.sbom.AttachmentTextDescriptor;
-import org.jqassistant.plugin.cyclonedx.impl.mapper.DescriptorMapper;
 import org.mapstruct.Mapper;
 
 @Mapper

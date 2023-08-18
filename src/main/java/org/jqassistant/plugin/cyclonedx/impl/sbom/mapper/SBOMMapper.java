@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.buschmais.jqassistant.core.scanner.api.Scanner;
+import com.buschmais.jqassistant.plugin.common.api.mapper.DescriptorEnricher;
 
 import org.cyclonedx.model.Bom;
 import org.cyclonedx.model.Dependency;
 import org.jqassistant.plugin.cyclonedx.api.model.sbom.ComponentDescriptor;
 import org.jqassistant.plugin.cyclonedx.api.model.sbom.SBOMDescriptor;
-import org.jqassistant.plugin.cyclonedx.impl.mapper.DescriptorEnricher;
 import org.mapstruct.*;
 
 import static java.util.Collections.emptyList;
