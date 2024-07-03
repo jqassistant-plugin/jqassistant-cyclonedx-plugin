@@ -47,7 +47,6 @@
     </scm>
 
     <properties>
-        <jqa-plugin-common.version>${com.buschmais.jqassistant.version}</jqa-plugin-common.version>
         <jqa-json-plugin.version>${com.buschmais.jqassistant.version}</jqa-json-plugin.version>
         <jqa-xml-plugin.version>${com.buschmais.jqassistant.version}</jqa-xml-plugin.version>
         <cyclonedx-core-java.version>7.3.2</cyclonedx-core-java.version>
