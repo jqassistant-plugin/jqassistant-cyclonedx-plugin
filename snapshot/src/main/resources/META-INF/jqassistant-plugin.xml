@@ -1,0 +1,34 @@
+<jqassistant-plugin xmlns="http://schema.jqassistant.org/plugin/v1.10"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://schema.jqassistant.org/plugin/v1.10 https://schema.jqassistant.org/plugin/jqassistant-plugin-v1.10.xsd"
+                    name="jQAssistant CycloneDX Plugin" id="jqassistant.plugin.cyclonedx"
+                    version="${project.version}">
+    <description>Provides a scanner for CycloneDX SBOM files.</description>
+    <model>
+        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.AttachmentTextDescriptor</class>
+        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.ComponentDescriptor</class>
+        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.ExternalReferenceDescriptor</class>
+        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.HashDescriptor</class>
+        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.LicenseDescriptor</class>
+        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.MetadataDescriptor</class>
+        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.OrganizationalContactDescriptor</class>
+        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.OrganizationalEntityDescriptor</class>
+        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.PropertyDescriptor</class>
+        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.SBOMDescriptor</class>
+        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.ToolDescriptor</class>
+        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.VulnerabilityAdvisoryDescriptor</class>
+        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.VulnerabilityAffectsDescriptor</class>
+        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.VulnerabilityAnalysisDescriptor</class>
+        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.VulnerabilityDescriptor</class>
+        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.VulnerabilityRatingDescriptor</class>
+        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.VulnerabilityReferenceDescriptor</class>
+        <class>org.jqassistant.plugin.cyclonedx.api.model.sbom.VulnerabilitySourceDescriptor</class>
+    </model>
+    <scope>
+        <class>org.jqassistant.plugin.cyclonedx.api.CycloneDXScope</class>
+    </scope>
+    <scanner>
+        <class>org.jqassistant.plugin.cyclonedx.impl.sbom.JsonSBOMScannerPlugin</class>
+        <class>org.jqassistant.plugin.cyclonedx.impl.sbom.XmlSBOMScannerPlugin</class>
+    </scanner>
+</jqassistant-plugin>
