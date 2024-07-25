@@ -49,7 +49,7 @@
     <properties>
         <jqa-json-plugin.version>${com.buschmais.jqassistant.version}</jqa-json-plugin.version>
         <jqa-xml-plugin.version>${com.buschmais.jqassistant.version}</jqa-xml-plugin.version>
-        <cyclonedx-core-java.version>7.3.2</cyclonedx-core-java.version>
+        <cyclonedx-core-java.version>9.0.4</cyclonedx-core-java.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
     </properties>
 
