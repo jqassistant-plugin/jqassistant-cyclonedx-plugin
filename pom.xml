@@ -12,11 +12,8 @@
     <version>1.1.0-SNAPSHOT</version>
 
     <name>jQAssistant CycloneDX Plugin</name>
-    <url>https://jqassistant.org/</url>
-
-    <description>
-        Plugin for jQAssistant plugin providing scanners and rules for CycloneDX files (e.g. SBOM).
-    </description>
+    <description>Plugin for jQAssistant providing scanners and rules for CycloneDX files (e.g. SBOM).</description>
+    <url>https://github.com/jqassistant-plugin/jqassistant-cyclonedx-plugin</url>
 
     <organization>
         <name>jQAssistant Development Team</name>
